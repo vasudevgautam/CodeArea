@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Bookmarks.css";
-
+const API_URL = import.meta.env.VITE_API_URL;
 
 function Bookmarks() {
 
@@ -42,7 +42,7 @@ function Bookmarks() {
 
             const response =
                 await fetch(
-                    "http://localhost:5000/api/bookmarks",
+                    `${API_URL}/bookmarks`,
                     {
                         headers: {
                             Authorization:
@@ -110,7 +110,7 @@ function Bookmarks() {
 
             const response =
                 await fetch(
-                    `http://localhost:5000/api/bookmarks/${problemId}`,
+                   `${API_URL}/bookmarks/${problemId}`,
                     {
                         method: "DELETE",
 

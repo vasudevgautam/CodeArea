@@ -1,0 +1,168 @@
+/* Imported after component styles so both themes are visually complete. */
+html { background: #0b1120; }
+html[data-theme="light"] { background: #f3f7ff; }
+html[data-theme="light"] body { background: #f3f7ff; color: #172033; }
+
+html[data-theme="light"] .navbar { background: rgba(255, 255, 255, .94); border-color: #d8e1ef; box-shadow: 0 8px 24px rgba(15, 23, 42, .08); }
+html[data-theme="light"] .logo-text { color: #172033; }
+html[data-theme="light"] .navbar-link { color: #526178; }
+html[data-theme="light"] .navbar-link:hover { color: #172033; background: #e9f1ff; }
+html[data-theme="light"] .navbar-logout { background: #fff; border-color: #d7e0ec; color: #475569; }
+html[data-theme="light"] .theme-toggle { background: #eff6ff; border-color: #93c5fd; color: #1d4ed8; }
+html[data-theme="light"] .app-footer { border-color: #d8e1ef; background: #fff; color: #64748b; }
+
+html[data-theme="light"] .dashboard-page,
+html[data-theme="light"] .problems-page,
+html[data-theme="light"] .bookmarks-page,
+html[data-theme="light"] .submission-history-page,
+html[data-theme="light"] .profile-page { color: #172033; background: radial-gradient(circle at 8% 0%, rgba(59,130,246,.16), transparent 30%), radial-gradient(circle at 96% 100%, rgba(14,165,233,.1), transparent 36%), #f3f7ff; }
+
+html[data-theme="light"] .dashboard-header h1,
+html[data-theme="light"] .problems-header h1,
+html[data-theme="light"] .bookmarks-header h1,
+html[data-theme="light"] .history-header h1 { background: none; -webkit-text-fill-color: #172033; color: #172033; }
+html[data-theme="light"] .dashboard-header p,
+html[data-theme="light"] .problems-header p,
+html[data-theme="light"] .bookmarks-header p,
+html[data-theme="light"] .history-header p,
+html[data-theme="light"] .problem-count { color: #64748b; }
+
+html[data-theme="light"] .dashboard-stat-card,
+html[data-theme="light"] .recent-submissions,
+html[data-theme="light"] .problem-filters,
+html[data-theme="light"] .problem-card,
+html[data-theme="light"] .saved-problem-card,
+html[data-theme="light"] .history-card,
+html[data-theme="light"] .profile-card,
+html[data-theme="light"] .profile-section,
+html[data-theme="light"] .profile-stat,
+html[data-theme="light"] .bookmarks-empty,
+html[data-theme="light"] .no-problems,
+html[data-theme="light"] .no-history { border-color: #d8e1ef; background: rgba(255,255,255,.92); box-shadow: 0 12px 28px rgba(15,23,42,.07); }
+html[data-theme="light"] .recent-header { background: #f8fbff; border-color: #d8e1ef; }
+html[data-theme="light"] .dashboard-stat-number,
+html[data-theme="light"] .recent-header h2,
+html[data-theme="light"] .problem-title,
+html[data-theme="light"] .saved-title-row h2,
+html[data-theme="light"] .history-card strong,
+html[data-theme="light"] .profile-header h1,
+html[data-theme="light"] .profile-info h2,
+html[data-theme="light"] .profile-section h2 { color: #172033; }
+html[data-theme="light"] .dashboard-stat-label,
+html[data-theme="light"] .profile-info p,
+html[data-theme="light"] .profile-row span,
+html[data-theme="light"] .stat-label { color: #64748b; }
+html[data-theme="light"] .profile-row strong { color: #334155; }
+
+/* Higher-contrast text for all lists and content panels. */
+html[data-theme="light"] .submission-title,
+html[data-theme="light"] .saved-title-row h2,
+html[data-theme="light"] .history-card strong,
+html[data-theme="light"] .history-card p,
+html[data-theme="light"] .history-date,
+html[data-theme="light"] .submission-difficulty,
+html[data-theme="light"] .submission-language,
+html[data-theme="light"] .saved-category,
+html[data-theme="light"] .bookmarks-empty p,
+html[data-theme="light"] .no-submissions,
+html[data-theme="light"] .no-problems,
+html[data-theme="light"] .no-history,
+html[data-theme="light"] .history-header p { color: #475569; }
+
+html[data-theme="light"] .saved-problem-card:hover .saved-title-row h2,
+html[data-theme="light"] .problem-title:hover,
+html[data-theme="light"] .submission-title:hover { color: #1d4ed8; }
+
+html[data-theme="light"] .category,
+html[data-theme="light"] .saved-category,
+html[data-theme="light"] .difficulty { color: #475569; border-color: #cbd5e1; background: #f1f5f9; }
+html[data-theme="light"] .difficulty.easy { color: #15803d; background: #f0fdf4; border-color: #86efac; }
+html[data-theme="light"] .difficulty.medium { color: #a16207; background: #fefce8; border-color: #fde047; }
+html[data-theme="light"] .difficulty.hard { color: #b91c1c; background: #fef2f2; border-color: #fca5a5; }
+html[data-theme="light"] .footer-brand { color: #1d4ed8; }
+html[data-theme="light"] .problem-filters input,
+html[data-theme="light"] .problem-filters select,
+html[data-theme="light"] .bookmark-button,
+html[data-theme="light"] .back-button { background: #fff; border-color: #cbd5e1; color: #334155; }
+
+html[data-theme="light"] .auth-container { background: #eef5ff; }
+html[data-theme="light"] .auth-card { background: rgba(255,255,255,.9); border-color: #d8e1ef; }
+html[data-theme="light"] .auth-card h1 { color: #172033; }
+html[data-theme="light"] .auth-card > p { color: #64748b; }
+html[data-theme="light"] .auth-card input { background: #fff; border-color: #cbd5e1; color: #172033; }
+
+html[data-theme="light"] .leetcode-page,
+html[data-theme="light"] .center-message { background: #f3f7ff; color: #475569; }
+html[data-theme="light"] .leetcode-topbar,
+html[data-theme="light"] .editor-topbar,
+html[data-theme="light"] .editor-bottom { background: #fff; border-color: #d8e1ef; }
+html[data-theme="light"] .topbar-logo,
+html[data-theme="light"] .problem-heading h1,
+html[data-theme="light"] .problem-section h2 { color: #172033; }
+html[data-theme="light"] .leetcode-problem { background: #f8fbff; border-color: #d8e1ef; }
+html[data-theme="light"] .problem-section p,
+html[data-theme="light"] .leetcode-example,
+html[data-theme="light"] .constraints { color: #475569; }
+html[data-theme="light"] .leetcode-example,
+html[data-theme="light"] .constraints { background: #fff; border-color: #d8e1ef; }
+html[data-theme="light"] .leetcode-example strong,
+html[data-theme="light"] .leetcode-example b,
+html[data-theme="light"] .result-title,
+html[data-theme="light"] .editor-label,
+html[data-theme="light"] .topbar-center,
+html[data-theme="light"] .topbar-problems,
+html[data-theme="light"] .history-link { color: #172033; }
+html[data-theme="light"] .leetcode-example strong { font-weight: 800; }
+html[data-theme="light"] .editor-topbar select,
+html[data-theme="light"] .run-btn { background: #f1f5f9; border-color: #cbd5e1; color: #172033; }
+html[data-theme="light"] .result-container pre,
+html[data-theme="light"] .result-container p { color: #334155; }
+
+/* Final contrast guard: component styles were originally written for dark mode. */
+html[data-theme="light"] .app-shell-content,
+html[data-theme="light"] .app-shell-content *:not(button) {
+    color: #172033 !important;
+}
+
+html[data-theme="light"] .app-shell-content input,
+html[data-theme="light"] .app-shell-content select,
+html[data-theme="light"] .app-shell-content textarea {
+    color: #172033 !important;
+}
+
+/* Preserve semantic status colours with dark, accessible shades. */
+html[data-theme="light"] .difficulty.easy,
+html[data-theme="light"] .saved-difficulty.easy,
+html[data-theme="light"] .solved-badge,
+html[data-theme="light"] .submission-status.accepted,
+html[data-theme="light"] .history-status.accepted,
+html[data-theme="light"] .result-title.accepted { color: #15803d !important; }
+
+html[data-theme="light"] .difficulty.medium,
+html[data-theme="light"] .saved-difficulty.medium,
+html[data-theme="light"] .submission-status.pending,
+html[data-theme="light"] .history-status.pending { color: #a16207 !important; }
+
+html[data-theme="light"] .difficulty.hard,
+html[data-theme="light"] .saved-difficulty.hard,
+html[data-theme="light"] .submission-status.wrong-answer,
+html[data-theme="light"] .history-status.failed,
+html[data-theme="light"] .result-title.rejected { color: #b91c1c !important; }
+
+html[data-theme="light"] .dashboard-action,
+html[data-theme="light"] .submit-btn,
+html[data-theme="light"] .primary-button,
+html[data-theme="light"] .profile-error button,
+html[data-theme="light"] .problems-error button,
+html[data-theme="light"] .bookmarks-empty button,
+html[data-theme="light"] .dashboard-error button { color: #fff !important; }
+html[data-theme="light"] .leetcode-editor,
+html[data-theme="light"] .code-area,
+html[data-theme="light"] .leetcode-code { background: #f8fafc; }
+html[data-theme="light"] .leetcode-code { color: #172033; }
+html[data-theme="light"] .line-numbers { background: #f1f5f9; border-color: #d8e1ef; color: #94a3b8; }
+html[data-theme="light"] .result-container { background: #fff; border-color: #d8e1ef; }
+
+@media (prefers-reduced-motion: no-preference) {
+    body, .navbar, .app-footer, .profile-page, .problems-page, .dashboard-page, .bookmarks-page, .submission-history-page { transition: background-color .28s ease, color .28s ease, border-color .28s ease; }
+}

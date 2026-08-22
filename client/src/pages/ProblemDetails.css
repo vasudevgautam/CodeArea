@@ -1,0 +1,1063 @@
+
+/* =========================================
+   MAIN PAGE
+========================================= */
+
+.leetcode-page {
+    height: 100vh;
+    width: 100%;
+    background: #0b0f14;
+    color: #f1f5f9;
+    overflow: hidden;
+
+    font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Roboto,
+        Arial,
+        sans-serif;
+}
+
+
+/* =========================================
+   TOP BAR
+========================================= */
+
+.leetcode-topbar {
+    height: 58px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 22px;
+
+    background: #111827;
+    border-bottom: 1px solid #263244;
+
+    box-sizing: border-box;
+
+    box-shadow:
+        0 2px 10px rgba(0, 0, 0, 0.25);
+
+    position: relative;
+    z-index: 10;
+}
+
+
+/* =========================================
+   LOGO
+========================================= */
+
+.topbar-logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    color: #f8fafc;
+
+    font-size: 20px;
+    font-weight: 750;
+
+    text-decoration: none;
+
+    letter-spacing: -0.4px;
+}
+
+.topbar-logo::before {
+    content: "</>";
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 31px;
+    height: 31px;
+
+    border-radius: 8px;
+
+    background: #2563eb;
+    color: white;
+
+    font-family: Consolas, monospace;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+
+/* =========================================
+   TOP CENTER
+========================================= */
+
+.topbar-center {
+    position: absolute;
+
+    left: 50%;
+    transform: translateX(-50%);
+
+    color: #94a3b8;
+
+    font-size: 13px;
+    font-weight: 500;
+}
+
+
+/* =========================================
+   PROBLEMS LINK
+========================================= */
+
+.topbar-problems {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+
+    color: #94a3b8;
+
+    text-decoration: none;
+
+    font-size: 14px;
+
+    padding: 8px 12px;
+
+    border-radius: 7px;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease;
+}
+
+.topbar-problems::before {
+    content: "←";
+    font-size: 16px;
+}
+
+.topbar-problems:hover {
+    color: #ffffff;
+    background: #1e293b;
+}
+
+
+/* =========================================
+   MAIN LAYOUT
+========================================= */
+
+.leetcode-main {
+    height: calc(100vh - 58px);
+
+    display: grid;
+
+    grid-template-columns:
+        minmax(380px, 45%)
+        minmax(500px, 55%);
+
+    min-width: 0;
+}
+
+
+/* =========================================
+   LEFT PROBLEM PANEL
+========================================= */
+
+.leetcode-problem {
+    overflow-y: auto;
+
+    padding: 32px 36px 60px;
+
+    background: #0f141b;
+
+    border-right: 1px solid #263244;
+
+    min-width: 0;
+
+    scrollbar-width: thin;
+    scrollbar-color: #334155 transparent;
+}
+
+.leetcode-problem::-webkit-scrollbar {
+    width: 8px;
+}
+
+.leetcode-problem::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.leetcode-problem::-webkit-scrollbar-thumb {
+    background: #334155;
+    border-radius: 10px;
+}
+
+
+/* =========================================
+   PROBLEM TITLE
+========================================= */
+
+.problem-heading h1 {
+    margin: 0 0 18px;
+
+    color: #f8fafc;
+
+    font-size: 28px;
+    line-height: 1.3;
+
+    font-weight: 700;
+
+    letter-spacing: -0.5px;
+}
+
+
+/* =========================================
+   PROBLEM META
+========================================= */
+
+.problem-meta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    margin-bottom: 30px;
+}
+
+.difficulty,
+.category {
+    display: inline-flex;
+    align-items: center;
+
+    min-height: 27px;
+
+    padding: 0 10px;
+
+    border-radius: 6px;
+
+    font-size: 12px;
+    font-weight: 600;
+
+    box-sizing: border-box;
+}
+
+.difficulty {
+    background: #172033;
+    border: 1px solid #26354d;
+}
+
+.difficulty.easy {
+    color: #4ade80;
+}
+
+.difficulty.medium {
+    color: #fbbf24;
+}
+
+.difficulty.hard {
+    color: #f87171;
+}
+
+.category {
+    color: #94a3b8;
+
+    background: #171d27;
+
+    border: 1px solid #293342;
+}
+
+
+/* =========================================
+   PROBLEM SECTION
+========================================= */
+
+.problem-section {
+    margin-bottom: 32px;
+}
+
+.problem-section h2 {
+    margin: 0 0 13px;
+
+    color: #f8fafc;
+
+    font-size: 18px;
+    font-weight: 650;
+
+    letter-spacing: -0.2px;
+}
+
+.problem-section p {
+    margin: 0;
+
+    color: #cbd5e1;
+
+    font-size: 15px;
+    line-height: 1.75;
+
+    white-space: pre-wrap;
+}
+
+
+/* =========================================
+   EXAMPLES
+========================================= */
+
+.leetcode-example {
+    margin: 14px 0;
+
+    padding: 16px 18px;
+
+    background: #121923;
+
+    border: 1px solid #263244;
+
+    border-radius: 9px;
+
+    color: #cbd5e1;
+
+    font-size: 14px;
+    line-height: 1.8;
+
+    transition:
+        border-color 0.2s ease,
+        background 0.2s ease;
+}
+
+.leetcode-example:hover {
+    background: #151e2a;
+    border-color: #334155;
+}
+
+.leetcode-example strong {
+    display: block;
+
+    margin-bottom: 8px;
+
+    color: #f1f5f9;
+
+    font-size: 14px;
+}
+
+.leetcode-example b {
+    color: #e2e8f0;
+}
+
+
+/* =========================================
+   CONSTRAINTS
+========================================= */
+
+.constraints {
+    padding: 14px 16px;
+
+    background: #121923;
+
+    border-left: 3px solid #334155;
+
+    border-radius: 5px;
+
+    color: #cbd5e1;
+
+    line-height: 1.8;
+}
+
+.constraint-item {
+    margin-bottom: 5px;
+}
+
+.constraint-item:last-child {
+    margin-bottom: 0;
+}
+
+
+/* =========================================
+   RIGHT EDITOR
+========================================= */
+
+.leetcode-editor {
+    display: flex;
+    flex-direction: column;
+
+    min-width: 0;
+    min-height: 0;
+
+    background: #0b0f14;
+}
+
+
+/* =========================================
+   EDITOR HEADER
+========================================= */
+
+.editor-topbar {
+    height: 50px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 15px;
+
+    box-sizing: border-box;
+
+    background: #111827;
+
+    border-bottom: 1px solid #263244;
+}
+
+.editor-language {
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.editor-label {
+    color: #94a3b8;
+
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.editor-topbar select {
+    min-width: 110px;
+
+    padding: 7px 30px 7px 11px;
+
+    background: #1a2330;
+
+    color: #e2e8f0;
+
+    border: 1px solid #334155;
+
+    border-radius: 7px;
+
+    outline: none;
+
+    font-size: 13px;
+
+    cursor: pointer;
+}
+
+.editor-topbar select:hover {
+    border-color: #475569;
+}
+
+.editor-topbar select:focus {
+    border-color: #3b82f6;
+
+    box-shadow:
+        0 0 0 2px rgba(59, 130, 246, 0.15);
+}
+
+
+/* =========================================
+   CODE AREA
+========================================= */
+
+.code-area {
+    flex: 1;
+
+    display: flex;
+
+    min-height: 0;
+
+    background: #0d1117;
+
+    overflow: hidden;
+}
+
+
+/* =========================================
+   LINE NUMBERS
+========================================= */
+
+.line-numbers {
+    width: 54px;
+
+    flex-shrink: 0;
+
+    padding-top: 20px;
+    padding-right: 14px;
+
+    box-sizing: border-box;
+
+    text-align: right;
+
+    color: #4b5563;
+
+    background: #0b1016;
+
+    border-right: 1px solid #1c2531;
+
+    font-family:
+        Consolas,
+        "Courier New",
+        monospace;
+
+    font-size: 14px;
+
+    line-height: 1.65;
+
+    user-select: none;
+
+    overflow: hidden;
+}
+
+.line-numbers div {
+    height: 23px;
+    box-sizing: border-box;
+}
+
+
+/* =========================================
+   CODE EDITOR
+========================================= */
+
+.leetcode-code {
+    flex: 1;
+
+    width: 100%;
+    min-width: 0;
+
+    resize: none;
+
+    border: none;
+    outline: none;
+
+    padding: 20px 18px;
+
+    box-sizing: border-box;
+
+    background: #0d1117;
+
+    color: #e6edf3;
+
+    font-family:
+        Consolas,
+        "Courier New",
+        monospace;
+
+    font-size: 14px;
+
+    line-height: 1.65;
+
+    white-space: pre;
+
+    tab-size: 4;
+
+    caret-color: #60a5fa;
+
+    overflow: auto;
+
+    scrollbar-width: thin;
+    scrollbar-color: #334155 transparent;
+}
+
+.leetcode-code::selection {
+    background: rgba(59, 130, 246, 0.35);
+}
+
+.leetcode-code::-webkit-scrollbar {
+    width: 9px;
+    height: 9px;
+}
+
+.leetcode-code::-webkit-scrollbar-track {
+    background: #0d1117;
+}
+
+.leetcode-code::-webkit-scrollbar-thumb {
+    background: #334155;
+    border-radius: 10px;
+}
+
+.leetcode-code::-webkit-scrollbar-thumb:hover {
+    background: #475569;
+}
+
+.leetcode-code::placeholder {
+    color: #475569;
+}
+
+
+/* =========================================
+   RESULT CONTAINER
+========================================= */
+
+.result-container {
+    max-height: 210px;
+
+    overflow-y: auto;
+
+    padding: 16px 18px;
+
+    box-sizing: border-box;
+
+    background: #101720;
+
+    border-top: 1px solid #263244;
+
+    scrollbar-width: thin;
+
+    scrollbar-color: #334155 transparent;
+}
+
+.result-container::-webkit-scrollbar {
+    width: 7px;
+}
+
+.result-container::-webkit-scrollbar-thumb {
+    background: #334155;
+    border-radius: 10px;
+}
+
+.result-block {
+    margin-bottom: 16px;
+}
+
+.result-block:last-child {
+    margin-bottom: 0;
+}
+
+
+/* =========================================
+   RESULT TITLE
+========================================= */
+
+.result-title {
+    margin-bottom: 9px;
+
+    color: #e2e8f0;
+
+    font-size: 14px;
+
+    font-weight: 650;
+}
+
+.result-title.accepted {
+    color: #4ade80;
+}
+
+.result-title.rejected {
+    color: #f87171;
+}
+
+
+/* =========================================
+   RESULT TEXT
+========================================= */
+
+.result-container pre {
+    margin: 0;
+
+    color: #aab5c2;
+
+    font-family:
+        Consolas,
+        "Courier New",
+        monospace;
+
+    font-size: 13px;
+
+    line-height: 1.6;
+
+    white-space: pre-wrap;
+
+    word-break: break-word;
+}
+
+.result-container p {
+    margin: 0;
+
+    color: #aab5c2;
+
+    font-size: 13px;
+
+    line-height: 1.6;
+}
+
+
+/* =========================================
+   BOTTOM BAR
+========================================= */
+
+.editor-bottom {
+    min-height: 64px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 16px;
+
+    box-sizing: border-box;
+
+    background: #111827;
+
+    border-top: 1px solid #263244;
+}
+
+
+/* =========================================
+   HISTORY
+========================================= */
+
+.history-link {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+
+    color: #94a3b8;
+
+    text-decoration: none;
+
+    font-size: 13px;
+    font-weight: 500;
+
+    padding: 8px 10px;
+
+    border-radius: 6px;
+
+    transition:
+        color 0.2s ease,
+        background 0.2s ease;
+}
+
+.history-link::before {
+    content: "◷";
+    font-size: 15px;
+}
+
+.history-link:hover {
+    color: #f8fafc;
+    background: #1e293b;
+}
+
+
+/* =========================================
+   BUTTON AREA
+========================================= */
+
+.editor-actions {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+}
+
+
+/* =========================================
+   COMMON BUTTON
+========================================= */
+
+.run-btn,
+.submit-btn {
+    min-width: 105px;
+
+    height: 38px;
+
+    padding: 0 17px;
+
+    border-radius: 7px;
+
+    border: 1px solid transparent;
+
+    cursor: pointer;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.15s ease,
+        opacity 0.2s ease;
+}
+
+.run-btn:active,
+.submit-btn:active {
+    transform: scale(0.97);
+}
+
+
+/* =========================================
+   RUN
+========================================= */
+
+.run-btn {
+    background: #1e293b;
+
+    color: #e2e8f0;
+
+    border-color: #334155;
+}
+
+.run-btn:hover {
+    background: #293548;
+    border-color: #475569;
+}
+
+
+/* =========================================
+   SUBMIT
+========================================= */
+
+.submit-btn {
+    background: #16a34a;
+
+    color: #ffffff;
+
+    border-color: #22c55e;
+
+    box-shadow:
+        0 3px 10px rgba(22, 163, 74, 0.18);
+}
+
+.submit-btn:hover {
+    background: #15803d;
+    border-color: #16a34a;
+}
+
+
+/* =========================================
+   DISABLED
+========================================= */
+
+.run-btn:disabled,
+.submit-btn:disabled {
+    opacity: 0.5;
+
+    cursor: not-allowed;
+
+    transform: none;
+
+    box-shadow: none;
+}
+
+
+/* =========================================
+   LOADING / ERROR
+========================================= */
+
+.center-message {
+    height: 100vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-direction: column;
+
+    gap: 15px;
+
+    background: #0b0f14;
+
+    color: #94a3b8;
+
+    font-size: 15px;
+}
+
+.center-message p {
+    margin: 0;
+}
+
+.center-message a {
+    color: #60a5fa;
+
+    text-decoration: none;
+
+    padding: 8px 12px;
+
+    border-radius: 6px;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease;
+}
+
+.center-message a:hover {
+    color: #93c5fd;
+    background: #172033;
+}
+
+
+/* =========================================
+   LOADING SPINNER
+========================================= */
+
+.loading-spinner {
+    width: 28px;
+    height: 28px;
+
+    border: 3px solid #263244;
+    border-top-color: #3b82f6;
+
+    border-radius: 50%;
+
+    animation: problem-spin 0.8s linear infinite;
+}
+
+@keyframes problem-spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 1000px) {
+
+    .leetcode-main {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .leetcode-problem {
+        padding: 25px;
+    }
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 800px) {
+
+    .leetcode-page {
+        height: auto;
+        min-height: 100vh;
+        overflow: auto;
+    }
+
+    .leetcode-topbar {
+        position: sticky;
+        top: 0;
+
+        height: 55px;
+
+        padding: 0 14px;
+    }
+
+    .topbar-center {
+        display: none;
+    }
+
+    .topbar-logo {
+        font-size: 18px;
+    }
+
+    .topbar-logo::before {
+        width: 28px;
+        height: 28px;
+
+        font-size: 10px;
+    }
+
+    .leetcode-main {
+        height: auto;
+
+        display: flex;
+        flex-direction: column;
+    }
+
+    .leetcode-problem {
+        min-height: 500px;
+
+        max-height: none;
+
+        border-right: none;
+
+        border-bottom: 1px solid #263244;
+
+        padding: 24px 18px 35px;
+    }
+
+    .problem-heading h1 {
+        font-size: 24px;
+    }
+
+    .leetcode-editor {
+        height: 650px;
+
+        min-height: 650px;
+    }
+
+    .editor-bottom {
+        padding: 0 10px;
+    }
+
+    .history-link {
+        font-size: 12px;
+    }
+
+    .run-btn,
+    .submit-btn {
+        min-width: 88px;
+
+        height: 36px;
+
+        padding: 0 11px;
+
+        font-size: 12px;
+    }
+}
+
+
+/* =========================================
+   SMALL MOBILE
+========================================= */
+
+@media (max-width: 500px) {
+
+    .topbar-problems {
+        font-size: 0;
+    }
+
+    .topbar-problems::before {
+        font-size: 18px;
+    }
+
+    .editor-bottom {
+        flex-direction: column;
+
+        align-items: stretch;
+
+        gap: 8px;
+
+        padding: 10px;
+
+        min-height: auto;
+    }
+
+    .history-link {
+        justify-content: center;
+    }
+
+    .editor-actions {
+        width: 100%;
+    }
+
+    .run-btn,
+    .submit-btn {
+        flex: 1;
+
+        width: 50%;
+    }
+
+    .line-numbers {
+        width: 43px;
+
+        padding-right: 9px;
+
+        font-size: 12px;
+    }
+
+    .leetcode-code {
+        padding-left: 12px;
+        padding-right: 10px;
+
+        font-size: 13px;
+    }
+
+    .editor-topbar select {
+        min-width: 95px;
+    }
+}

@@ -1,0 +1,880 @@
+
+/* =========================================
+   SUBMISSION HISTORY PAGE
+========================================= */
+
+.submission-history-page {
+    min-height: 100vh;
+    width: 100%;
+    box-sizing: border-box;
+
+    padding: 42px 48px 60px;
+
+    background:
+        radial-gradient(
+            circle at 12% 0%,
+            rgba(37, 99, 235, 0.10),
+            transparent 28%
+        ),
+        radial-gradient(
+            circle at 88% 20%,
+            rgba(124, 58, 237, 0.08),
+            transparent 26%
+        ),
+        #080d18;
+
+    color: #e5e7eb;
+}
+
+
+/* =========================================
+   HEADER
+========================================= */
+
+.history-header {
+    max-width: 1200px;
+
+    margin: 0 auto 32px;
+
+    animation: historyFadeUp 0.5s ease both;
+}
+
+
+/* =========================================
+   BACK LINK
+========================================= */
+
+.back-problem {
+    display: inline-flex;
+    align-items: center;
+
+    margin-bottom: 20px;
+
+    padding: 8px 13px;
+
+    border: 1px solid #263449;
+    border-radius: 8px;
+
+    background: rgba(15, 23, 42, 0.75);
+
+    color: #93c5fd;
+
+    text-decoration: none;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease,
+        color 0.2s ease,
+        transform 0.2s ease;
+}
+
+
+.back-problem:hover {
+    background: #17243a;
+
+    border-color: #3b82f6;
+
+    color: #ffffff;
+
+    transform: translateX(-3px);
+}
+
+
+/* =========================================
+   TITLE
+========================================= */
+
+.history-header h1 {
+    margin: 0;
+
+    font-size: 38px;
+
+    font-weight: 800;
+
+    letter-spacing: -1px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ffffff,
+            #93c5fd
+        );
+
+    -webkit-background-clip: text;
+    background-clip: text;
+
+    -webkit-text-fill-color: transparent;
+}
+
+
+.history-header p {
+    margin: 9px 0 0;
+
+    color: #8fa0b8;
+
+    font-size: 15px;
+
+    line-height: 1.6;
+}
+
+
+/* =========================================
+   HISTORY LIST
+========================================= */
+
+.history-list {
+    max-width: 1200px;
+
+    margin: 0 auto;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 10px;
+}
+
+
+/* =========================================
+   HISTORY CARD
+========================================= */
+
+.history-card {
+    position: relative;
+
+    display: grid;
+
+    grid-template-columns:
+        minmax(220px, 2fr)
+        minmax(130px, 1fr)
+        minmax(200px, 1.5fr);
+
+    align-items: center;
+
+    gap: 20px;
+
+    padding: 20px 22px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(17, 27, 45, 0.98),
+            rgba(11, 19, 33, 0.98)
+        );
+
+    border: 1px solid #1f2d44;
+
+    border-radius: 12px;
+
+    overflow: hidden;
+
+    transition:
+        transform 0.22s ease,
+        border-color 0.22s ease,
+        box-shadow 0.22s ease,
+        background 0.22s ease;
+
+    animation: historyCardAppear 0.45s ease both;
+}
+
+
+/* =========================================
+   LEFT ACCENT
+========================================= */
+
+.history-card::before {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    top: 0;
+    bottom: 0;
+
+    width: 2px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #3b82f6,
+            #8b5cf6
+        );
+
+    opacity: 0;
+
+    transition: opacity 0.22s ease;
+}
+
+
+/* =========================================
+   TOP GLOW
+========================================= */
+
+.history-card::after {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: 8%;
+
+    width: 84%;
+    height: 1px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(96, 165, 250, 0.20),
+            transparent
+        );
+
+    opacity: 0;
+
+    transition: opacity 0.22s ease;
+}
+
+
+/* =========================================
+   HOVER
+========================================= */
+
+.history-card:hover {
+    transform: translateY(-3px);
+
+    border-color: #304766;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(19, 32, 53, 1),
+            rgba(12, 22, 39, 1)
+        );
+
+    box-shadow:
+        0 14px 32px rgba(0, 0, 0, 0.30),
+        0 0 25px rgba(37, 99, 235, 0.05);
+}
+
+
+.history-card:hover::before,
+.history-card:hover::after {
+    opacity: 1;
+}
+
+
+/* =========================================
+   SUBMISSION INFO
+========================================= */
+
+.history-card strong {
+    display: block;
+
+    color: #edf3fb;
+
+    font-size: 15px;
+
+    font-weight: 650;
+}
+
+
+.history-card p {
+    margin: 8px 0 0;
+
+    color: #8292aa;
+
+    font-size: 13px;
+}
+
+
+/* =========================================
+   LANGUAGE
+========================================= */
+
+.history-card p::first-letter {
+    color: #cbd5e1;
+}
+
+
+/* =========================================
+   STATUS
+========================================= */
+
+.history-status {
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    width: fit-content;
+
+    min-width: 105px;
+
+    min-height: 30px;
+
+    box-sizing: border-box;
+
+    padding: 5px 12px;
+
+    border-radius: 7px;
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+    letter-spacing: 0.2px;
+
+    background: rgba(51, 65, 85, 0.35);
+
+    border: 1px solid #2b3b55;
+
+    color: #cbd5e1;
+}
+
+
+/* =========================================
+   STATUS - ACCEPTED
+========================================= */
+
+.history-status.accepted {
+    color: #4ade80;
+
+    background:
+        rgba(34, 197, 94, 0.09);
+
+    border-color:
+        rgba(34, 197, 94, 0.22);
+
+    box-shadow:
+        0 0 15px rgba(34, 197, 94, 0.04);
+}
+
+
+/* =========================================
+   STATUS - WRONG ANSWER
+========================================= */
+
+.history-status.wrong-answer {
+    color: #f87171;
+
+    background:
+        rgba(239, 68, 68, 0.09);
+
+    border-color:
+        rgba(239, 68, 68, 0.22);
+}
+
+
+/* =========================================
+   STATUS - FAILED
+========================================= */
+
+.history-status.failed {
+    color: #f87171;
+
+    background:
+        rgba(239, 68, 68, 0.09);
+
+    border-color:
+        rgba(239, 68, 68, 0.22);
+}
+
+
+/* =========================================
+   STATUS - PENDING
+========================================= */
+
+.history-status.pending {
+    color: #facc15;
+
+    background:
+        rgba(234, 179, 8, 0.09);
+
+    border-color:
+        rgba(234, 179, 8, 0.22);
+}
+
+
+/* =========================================
+   DATE
+========================================= */
+
+.history-date {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: flex-end;
+
+    color: #8292aa;
+
+    text-align: right;
+
+    font-size: 13px;
+
+    line-height: 1.5;
+}
+
+
+/* =========================================
+   EMPTY STATE
+========================================= */
+
+.no-history {
+    max-width: 1200px;
+
+    margin: 0 auto;
+
+    padding: 75px 30px;
+
+    text-align: center;
+
+    background:
+        radial-gradient(
+            circle at 50% 0%,
+            rgba(37, 99, 235, 0.08),
+            transparent 38%
+        ),
+        linear-gradient(
+            145deg,
+            #111b2d,
+            #0c1422
+        );
+
+    border: 1px dashed #30415c;
+
+    border-radius: 15px;
+
+    box-shadow:
+        0 15px 40px rgba(0, 0, 0, 0.20);
+
+    animation:
+        historyFadeUp 0.45s ease both;
+}
+
+
+/* =========================================
+   EMPTY ICON
+========================================= */
+
+.no-history::before {
+    content: "⌁";
+
+    width: 76px;
+    height: 76px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    margin: 0 auto 18px;
+
+    border-radius: 50%;
+
+    background:
+        rgba(59, 130, 246, 0.07);
+
+    border:
+        1px solid rgba(59, 130, 246, 0.15);
+
+    color: #60a5fa;
+
+    font-size: 35px;
+
+    box-shadow:
+        0 0 30px rgba(37, 99, 235, 0.07);
+}
+
+
+.no-history h2 {
+    margin: 0 0 10px;
+
+    color: #f8fafc;
+
+    font-size: 22px;
+}
+
+
+.no-history p {
+    max-width: 500px;
+
+    margin: 0 auto 25px;
+
+    color: #8292aa;
+
+    line-height: 1.7;
+
+    font-size: 14px;
+}
+
+
+/* =========================================
+   SOLVE BUTTON
+========================================= */
+
+.solve-button {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    min-height: 42px;
+
+    padding: 0 20px;
+
+    border:
+        1px solid #2563eb;
+
+    border-radius: 8px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #2563eb,
+            #1d4ed8
+        );
+
+    color: #ffffff;
+
+    text-decoration: none;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    box-shadow:
+        0 7px 20px rgba(37, 99, 235, 0.18);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        filter 0.2s ease;
+}
+
+
+.solve-button:hover {
+    transform: translateY(-2px);
+
+    filter: brightness(1.08);
+
+    box-shadow:
+        0 10px 25px rgba(37, 99, 235, 0.28);
+}
+
+
+.solve-button:active {
+    transform: scale(0.97);
+}
+
+
+/* =========================================
+   LOADING
+========================================= */
+
+.history-loading {
+    min-height: 300px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    color: #8292aa;
+
+    font-size: 15px;
+}
+
+
+.history-loading::after {
+    content: "";
+
+    width: 18px;
+    height: 18px;
+
+    margin-left: 10px;
+
+    border:
+        2px solid #263650;
+
+    border-top-color:
+        #3b82f6;
+
+    border-radius: 50%;
+
+    animation:
+        historySpin 0.8s linear infinite;
+}
+
+
+/* =========================================
+   ERROR
+========================================= */
+
+.history-error {
+    max-width: 600px;
+
+    margin: 70px auto;
+
+    padding: 30px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    gap: 15px;
+
+    text-align: center;
+
+    background:
+        rgba(69, 10, 10, 0.35);
+
+    border:
+        1px solid rgba(239, 68, 68, 0.22);
+
+    border-radius: 12px;
+
+    box-shadow:
+        0 12px 30px rgba(0, 0, 0, 0.20);
+
+    animation:
+        historyFadeUp 0.4s ease both;
+}
+
+
+.history-error p {
+    margin: 0;
+
+    color: #fca5a5;
+
+    font-size: 14px;
+}
+
+
+.history-error a {
+    display: inline-flex;
+
+    align-items: center;
+
+    padding: 9px 14px;
+
+    border:
+        1px solid #263449;
+
+    border-radius: 8px;
+
+    background:
+        rgba(15, 23, 42, 0.75);
+
+    color: #93c5fd;
+
+    text-decoration: none;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease,
+        color 0.2s ease;
+}
+
+
+.history-error a:hover {
+    background: #17243a;
+
+    border-color: #3b82f6;
+
+    color: #ffffff;
+}
+
+
+/* =========================================
+   SCROLLBAR
+========================================= */
+
+.submission-history-page::-webkit-scrollbar {
+    width: 8px;
+}
+
+
+.submission-history-page::-webkit-scrollbar-track {
+    background: #080d18;
+}
+
+
+.submission-history-page::-webkit-scrollbar-thumb {
+    background: #263650;
+
+    border-radius: 10px;
+}
+
+
+.submission-history-page::-webkit-scrollbar-thumb:hover {
+    background: #344968;
+}
+
+
+/* =========================================
+   ANIMATIONS
+========================================= */
+
+@keyframes historyFadeUp {
+
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+}
+
+
+@keyframes historyCardAppear {
+
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+}
+
+
+@keyframes historySpin {
+
+    to {
+        transform: rotate(360deg);
+    }
+
+}
+
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 900px) {
+
+    .submission-history-page {
+        padding: 32px 25px 50px;
+    }
+
+    .history-header h1 {
+        font-size: 34px;
+    }
+
+    .history-card {
+        grid-template-columns:
+            1.5fr
+            1fr
+            1.3fr;
+    }
+
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 650px) {
+
+    .submission-history-page {
+        padding: 25px 15px 40px;
+    }
+
+
+    .history-header {
+        margin-bottom: 24px;
+    }
+
+
+    .history-header h1 {
+        font-size: 30px;
+    }
+
+
+    .history-header p {
+        font-size: 14px;
+    }
+
+
+    .history-card {
+        grid-template-columns: 1fr;
+
+        gap: 13px;
+
+        padding: 18px;
+    }
+
+
+    .history-status {
+        min-width: 0;
+
+        width: fit-content;
+    }
+
+
+    .history-date {
+        justify-content: flex-start;
+
+        text-align: left;
+
+        padding-top: 4px;
+
+        border-top:
+            1px solid #1f2d44;
+    }
+
+
+    .no-history {
+        padding: 55px 20px;
+    }
+
+}
+
+
+/* =========================================
+   REDUCE MOTION
+========================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .history-header,
+    .history-card,
+    .no-history,
+    .history-error {
+        animation: none;
+    }
+
+
+    .history-loading::after {
+        animation: none;
+    }
+
+
+    .back-problem,
+    .history-card,
+    .solve-button {
+        transition: none;
+    }
+
+}
+

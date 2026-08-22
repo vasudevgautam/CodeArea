@@ -1,0 +1,19 @@
+# Dependencies and generated builds
+node_modules/
+client/node_modules/
+server/node_modules/
+client/dist/
+server/temp/
+
+# Environment secrets
+.env
+.env.*
+!.env.example
+client/.env
+server/.env
+
+# Logs and local editor files
+*.log
+.vscode/
+.idea/
+coverage/

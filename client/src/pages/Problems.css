@@ -1,0 +1,859 @@
+/* =========================================
+   PROBLEMS PAGE
+========================================= */
+
+.problems-page {
+    min-height: 100vh;
+    padding: 42px 48px 60px;
+
+    background:
+        radial-gradient(
+            circle at 15% 0%,
+            rgba(37, 99, 235, 0.10),
+            transparent 28%
+        ),
+        radial-gradient(
+            circle at 90% 20%,
+            rgba(124, 58, 237, 0.08),
+            transparent 25%
+        ),
+        #080d18;
+
+    color: #f8fafc;
+
+    box-sizing: border-box;
+}
+
+
+/* =========================================
+   HEADER
+========================================= */
+
+.problems-header {
+    max-width: 1200px;
+
+    margin: 0 auto 32px;
+
+    animation: problemsFadeUp 0.55s ease both;
+}
+
+
+.problems-header h1 {
+    margin: 0 0 9px;
+
+    font-size: 38px;
+
+    font-weight: 800;
+
+    letter-spacing: -1px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ffffff,
+            #93c5fd
+        );
+
+    -webkit-background-clip: text;
+    background-clip: text;
+
+    -webkit-text-fill-color: transparent;
+}
+
+
+.problems-header p {
+    margin: 0;
+
+    color: #8fa0b8;
+
+    font-size: 15px;
+
+    line-height: 1.6;
+}
+
+
+/* =========================================
+   FILTER CONTAINER
+========================================= */
+
+.problem-filters {
+    max-width: 1200px;
+
+    display: flex;
+
+    gap: 12px;
+
+    margin: 0 auto 18px;
+
+    padding: 14px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(17, 27, 45, 0.96),
+            rgba(10, 17, 30, 0.96)
+        );
+
+    border: 1px solid #1e2b42;
+
+    border-radius: 14px;
+
+    box-shadow:
+        0 10px 35px rgba(0, 0, 0, 0.20),
+        inset 0 1px 0 rgba(255, 255, 255, 0.025);
+
+    animation: problemsFadeUp 0.65s ease both;
+}
+
+
+/* =========================================
+   SEARCH INPUT
+========================================= */
+
+.problem-filters input,
+.problem-filters select {
+    height: 44px;
+
+    box-sizing: border-box;
+
+    border: 1px solid #263650;
+
+    border-radius: 9px;
+
+    background: #0c1422;
+
+    color: #f8fafc;
+
+    font-size: 14px;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.2s ease,
+        transform 0.2s ease;
+}
+
+
+.problem-filters input {
+    flex: 1;
+
+    min-width: 0;
+
+    padding: 0 15px;
+}
+
+
+.problem-filters select {
+    min-width: 190px;
+
+    padding: 0 13px;
+
+    cursor: pointer;
+}
+
+
+/* =========================================
+   INPUT PLACEHOLDER
+========================================= */
+
+.problem-filters input::placeholder {
+    color: #64748b;
+}
+
+
+/* =========================================
+   INPUT FOCUS
+========================================= */
+
+.problem-filters input:focus,
+.problem-filters select:focus {
+    outline: none;
+
+    border-color: #3b82f6;
+
+    background: #0d1728;
+
+    box-shadow:
+        0 0 0 3px rgba(59, 130, 246, 0.12),
+        0 0 20px rgba(37, 99, 235, 0.08);
+}
+
+
+/* =========================================
+   HOVER
+========================================= */
+
+.problem-filters input:hover,
+.problem-filters select:hover {
+    border-color: #334d73;
+}
+
+
+/* =========================================
+   COUNT
+========================================= */
+
+.problem-count {
+    max-width: 1200px;
+
+    margin: 0 auto 14px;
+
+    color: #71839d;
+
+    font-size: 13px;
+
+    font-weight: 500;
+
+    letter-spacing: 0.2px;
+}
+
+
+/* =========================================
+   PROBLEM LIST
+========================================= */
+
+.problems-list {
+    max-width: 1200px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 10px;
+
+    margin: 0 auto;
+}
+
+
+/* =========================================
+   PROBLEM CARD
+========================================= */
+
+.problem-card {
+    position: relative;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    min-height: 0;
+
+    gap: 14px;
+
+    padding: 13px 16px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(17, 27, 45, 0.98),
+            rgba(11, 19, 33, 0.98)
+        );
+
+    border: 1px solid #1f2d44;
+
+    border-radius: 12px;
+
+    overflow: hidden;
+
+    transition:
+        transform 0.22s ease,
+        border-color 0.22s ease,
+        box-shadow 0.22s ease,
+        background 0.22s ease;
+
+    animation: problemCardAppear 0.45s ease both;
+}
+
+
+/* LEFT GLOW LINE */
+
+.problem-card::before {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    top: 0;
+    bottom: 0;
+
+    width: 2px;
+
+    background: #2563eb;
+
+    opacity: 0;
+
+    transition: opacity 0.22s ease;
+}
+
+
+/* TOP LIGHT */
+
+.problem-card::after {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: 8%;
+
+    width: 84%;
+    height: 1px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(96, 165, 250, 0.18),
+            transparent
+        );
+
+    opacity: 0;
+
+    transition: opacity 0.22s ease;
+}
+
+
+/* =========================================
+   CARD HOVER
+========================================= */
+
+.problem-card:hover {
+    transform: translateY(-3px);
+
+    border-color: #304766;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(19, 32, 53, 1),
+            rgba(12, 22, 39, 1)
+        );
+
+    box-shadow:
+        0 12px 30px rgba(0, 0, 0, 0.30),
+        0 0 25px rgba(37, 99, 235, 0.05);
+}
+
+
+.problem-card:hover::before,
+.problem-card:hover::after {
+    opacity: 1;
+}
+
+
+/* =========================================
+   PROBLEM MAIN
+========================================= */
+
+.problem-main {
+    flex: 1;
+
+    min-width: 0;
+}
+
+
+/* =========================================
+   PROBLEM TITLE
+========================================= */
+
+.problem-title {
+    display: inline-block;
+
+    max-width: 100%;
+
+    color: #e8eef8;
+
+    font-size: 17px;
+
+    font-weight: 650;
+
+    text-decoration: none;
+
+    margin-bottom: 6px;
+
+    transition:
+        color 0.18s ease,
+        transform 0.18s ease;
+}
+
+
+.problem-title:hover {
+    color: #60a5fa;
+}
+
+
+/* =========================================
+   META
+========================================= */
+
+.problem-meta {
+    display: flex;
+
+    align-items: center;
+
+    flex-wrap: wrap;
+
+    gap: 6px;
+}
+
+
+.difficulty,
+.category,
+.solved-badge {
+    display: inline-flex;
+
+    align-items: center;
+
+    min-height: 25px;
+
+    box-sizing: border-box;
+
+    padding: 4px 9px;
+
+    border-radius: 6px;
+
+    font-size: 12px;
+
+    font-weight: 600;
+}
+
+
+/* =========================================
+   DIFFICULTY
+========================================= */
+
+.difficulty {
+    border: 1px solid transparent;
+
+    background: rgba(51, 65, 85, 0.45);
+}
+
+
+.difficulty.easy {
+    color: #4ade80;
+
+    background: rgba(34, 197, 94, 0.09);
+
+    border-color: rgba(34, 197, 94, 0.16);
+}
+
+
+.difficulty.medium {
+    color: #facc15;
+
+    background: rgba(234, 179, 8, 0.09);
+
+    border-color: rgba(234, 179, 8, 0.16);
+}
+
+
+.difficulty.hard {
+    color: #f87171;
+
+    background: rgba(239, 68, 68, 0.09);
+
+    border-color: rgba(239, 68, 68, 0.16);
+}
+
+
+/* =========================================
+   CATEGORY
+========================================= */
+
+.category {
+    color: #8fa0b8;
+
+    background: rgba(51, 65, 85, 0.28);
+
+    border: 1px solid #263650;
+}
+
+
+/* =========================================
+   BOOKMARK BUTTON
+========================================= */
+
+.bookmark-button {
+    flex-shrink: 0;
+
+    width: 38px;
+    height: 38px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border: 1px solid #2b3b55;
+
+    border-radius: 9px;
+
+    background: #0b1321;
+
+    color: #64748b;
+
+    font-size: 22px;
+
+    line-height: 1;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.18s ease,
+        color 0.18s ease,
+        border-color 0.18s ease,
+        background 0.18s ease,
+        box-shadow 0.18s ease;
+}
+
+
+.bookmark-button:hover {
+    transform: scale(1.08);
+
+    color: #facc15;
+
+    border-color: rgba(250, 204, 21, 0.45);
+
+    background: rgba(250, 204, 21, 0.07);
+
+    box-shadow:
+        0 0 16px rgba(250, 204, 21, 0.08);
+}
+
+
+.bookmark-button:active {
+    transform: scale(0.94);
+}
+
+
+.bookmark-button.bookmarked {
+    color: #facc15;
+
+    border-color: rgba(250, 204, 21, 0.4);
+
+    background:
+        rgba(250, 204, 21, 0.08);
+
+    box-shadow:
+        0 0 18px rgba(250, 204, 21, 0.08);
+}
+
+
+/* =========================================
+   LOADING
+========================================= */
+
+.problems-loading {
+    min-height: 350px;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    color: #8292aa;
+
+    font-size: 15px;
+}
+
+
+.problems-loading::after {
+    content: "";
+
+    width: 18px;
+    height: 18px;
+
+    margin-left: 10px;
+
+    border: 2px solid #263650;
+
+    border-top-color: #3b82f6;
+
+    border-radius: 50%;
+
+    animation: problemsSpin 0.8s linear infinite;
+}
+
+
+/* =========================================
+   ERROR
+========================================= */
+
+.problems-error {
+    max-width: 500px;
+
+    margin: 80px auto;
+
+    padding: 35px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    gap: 15px;
+
+    text-align: center;
+
+    color: #f87171;
+
+    background: #111a2a;
+
+    border: 1px solid rgba(239, 68, 68, 0.20);
+
+    border-radius: 14px;
+
+    box-shadow:
+        0 15px 40px rgba(0, 0, 0, 0.25);
+}
+
+
+.problems-error button {
+    padding: 10px 20px;
+
+    border: 1px solid #2563eb;
+
+    border-radius: 8px;
+
+    background: #2563eb;
+
+    color: white;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+.problems-error button:hover {
+    background: #3b82f6;
+
+    transform: translateY(-1px);
+
+    box-shadow:
+        0 7px 20px rgba(37, 99, 235, 0.22);
+}
+
+
+/* =========================================
+   EMPTY STATE
+========================================= */
+
+.no-problems {
+    max-width: 1200px;
+
+    margin: 20px auto;
+
+    padding: 60px 25px;
+
+    text-align: center;
+
+    background:
+        linear-gradient(
+            145deg,
+            #111b2d,
+            #0c1422
+        );
+
+    border: 1px dashed #30415c;
+
+    border-radius: 14px;
+
+    color: #71839d;
+
+    animation: problemsFadeUp 0.4s ease both;
+}
+
+
+/* =========================================
+   SCROLLBAR
+========================================= */
+
+.problems-page::-webkit-scrollbar {
+    width: 8px;
+}
+
+
+.problems-page::-webkit-scrollbar-track {
+    background: #080d18;
+}
+
+
+.problems-page::-webkit-scrollbar-thumb {
+    background: #263650;
+
+    border-radius: 10px;
+}
+
+
+.problems-page::-webkit-scrollbar-thumb:hover {
+    background: #344968;
+}
+
+
+/* =========================================
+   ANIMATIONS
+========================================= */
+
+@keyframes problemsFadeUp {
+
+    from {
+        opacity: 0;
+
+        transform: translateY(12px);
+    }
+
+    to {
+        opacity: 1;
+
+        transform: translateY(0);
+    }
+
+}
+
+
+@keyframes problemCardAppear {
+
+    from {
+        opacity: 0;
+
+        transform: translateY(8px);
+    }
+
+    to {
+        opacity: 1;
+
+        transform: translateY(0);
+    }
+
+}
+
+
+@keyframes problemsSpin {
+
+    to {
+        transform: rotate(360deg);
+    }
+
+}
+
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 900px) {
+
+    .problems-page {
+        padding: 32px 25px 50px;
+    }
+
+
+    .problems-header h1 {
+        font-size: 34px;
+    }
+
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 700px) {
+
+    .problems-page {
+        padding: 25px 15px 40px;
+    }
+
+
+    .problems-header {
+        margin-bottom: 22px;
+    }
+
+
+    .problems-header h1 {
+        font-size: 30px;
+    }
+
+
+    .problems-header p {
+        font-size: 14px;
+    }
+
+
+    .problem-filters {
+        flex-direction: column;
+
+        padding: 11px;
+    }
+
+
+    .problem-filters input,
+    .problem-filters select {
+        width: 100%;
+
+        min-width: 0;
+    }
+
+
+    .problem-card {
+        padding: 16px;
+
+        gap: 12px;
+    }
+
+
+    .problem-title {
+        font-size: 15px;
+    }
+
+
+    .bookmark-button {
+        width: 38px;
+        height: 38px;
+
+        font-size: 20px;
+    }
+
+}
+
+
+/* =========================================
+   REDUCE MOTION
+========================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .problem-card,
+    .problems-header,
+    .problem-filters,
+    .no-problems {
+        animation: none;
+    }
+
+    .problem-card,
+    .bookmark-button,
+    .problem-title {
+        transition: none;
+    }
+
+}
+
+.solved-badge {
+    color: #4ade80;
+
+    background: rgba(34, 197, 94, 0.1);
+
+    border: 1px solid rgba(34, 197, 94, 0.26);
+}

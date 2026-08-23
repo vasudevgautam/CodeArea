@@ -120,9 +120,9 @@ router.post("/", protect, async (req, res) => {
             });
 
         }
-console.log("PROBLEM ID:", problemId);
+// console.log("PROBLEM ID:", problemId);
 
-console.log("JUDGE:", problem.judge);
+// console.log("JUDGE:", problem.judge);
 
         // =====================================
         // CHECK TEST CASES
@@ -168,7 +168,7 @@ console.log("JUDGE:", problem.judge);
                 `Running test case ${i + 1}/${problem.testCases.length}`
             );
 
-
+console.log("PROBLEM SENT TO RUNNER:", problem);
        const result =
     await runCppCode(
         code,

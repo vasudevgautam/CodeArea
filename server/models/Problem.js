@@ -88,6 +88,10 @@ const judgeSchema = new mongoose.Schema(
 
 const problemSchema = new mongoose.Schema(
     {
+        // =====================================
+        // BASIC INFORMATION
+        // =====================================
+
         title: {
             type: String,
             required: true,
@@ -108,7 +112,11 @@ const problemSchema = new mongoose.Schema(
 
         difficulty: {
             type: String,
-            enum: ["Easy", "Medium", "Hard"],
+            enum: [
+                "Easy",
+                "Medium",
+                "Hard"
+            ],
             required: true
         },
 
@@ -129,11 +137,24 @@ const problemSchema = new mongoose.Schema(
             }
         ],
 
+
+        // =====================================
+        // EXAMPLES
+        // =====================================
+
         examples: [
             {
-                input: String,
-                output: String,
-                explanation: String
+                input: {
+                    type: String
+                },
+
+                output: {
+                    type: String
+                },
+
+                explanation: {
+                    type: String
+                }
             }
         ],
 
@@ -142,16 +163,9 @@ const problemSchema = new mongoose.Schema(
         // TEST CASES
         // =====================================
 
-        testCases: [testCaseSchema],
-
-
-        // =====================================
-        // JUDGE CONFIGURATION
-        // =====================================
-
-        judge: {
-            type: judgeSchema,
-            required: true
+        testCases: {
+            type: [testCaseSchema],
+            default: []
         },
 
 
@@ -160,6 +174,7 @@ const problemSchema = new mongoose.Schema(
         // =====================================
 
         starterCode: {
+
             cpp: {
                 type: String,
                 default: ""
@@ -174,6 +189,18 @@ const problemSchema = new mongoose.Schema(
                 type: String,
                 default: ""
             }
+
+        },
+
+
+        // =====================================
+        // JUDGE CONFIGURATION
+        // =====================================
+
+        judge: {
+            type: judgeSchema,
+            required: false,
+            default: null
         },
 
 
@@ -190,6 +217,7 @@ const problemSchema = new mongoose.Schema(
             type: Number,
             default: 0
         }
+
     },
 
     {
@@ -198,5 +226,12 @@ const problemSchema = new mongoose.Schema(
 );
 
 
+// =====================================
+// EXPORT MODEL
+// =====================================
+
 module.exports =
-    mongoose.model("Problem", problemSchema);
+    mongoose.model(
+        "Problem",
+        problemSchema
+    );

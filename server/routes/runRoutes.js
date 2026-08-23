@@ -104,7 +104,9 @@ router.post("/run", async (req, res) => {
 
         const result = await runCppCode(
             code,
-            testCase.input
+            testCase.input,
+            problem
+        );
 
 
         // =========================

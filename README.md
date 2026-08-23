@@ -2,7 +2,7 @@
 
 > A full-stack competitive programming platform where users can discover coding problems, solve them, submit solutions, bookmark problems, and track their coding progress.
 
-[![Live Demo](https://img.shields.io/badge/Live-Demo-success)](https://codearea-56cz.onrender.com)
+[![Live Demo](https://img.shields.io/badge/Live-Demo-success)](https://codearea-fronted.onrender.com)
 [![Frontend](https://img.shields.io/badge/Frontend-React-blue)](https://react.dev/)
 [![Backend](https://img.shields.io/badge/Backend-Node.js-green)](https://nodejs.org/)
 [![Database](https://img.shields.io/badge/Database-MongoDB-brightgreen)](https://www.mongodb.com/)
@@ -13,7 +13,7 @@
 ## 🌐 Live Demo
 
 **CodeArea:**
-https://codearea-56cz.onrender.com
+https://codearea-fronted.onrender.com
 
 The application is deployed with:
 
@@ -1049,7 +1049,7 @@ Hosting   → Render
 
 ### Live Application
 
-🌐 **https://codearea-56cz.onrender.com**
+🌐 **https://codearea-fronted.onrender.com**
 
 ---
 

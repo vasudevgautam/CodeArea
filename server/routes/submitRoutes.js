@@ -167,11 +167,12 @@ router.post("/", protect, async (req, res) => {
             );
 
 
-            const result =
-                await runCppCode(
-                    code,
-                    testCase.input
-                );
+           const result =
+    await runCppCode(
+        code,
+        testCase.input,
+        problem
+    );
 
 
             // =====================================

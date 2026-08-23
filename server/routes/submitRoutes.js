@@ -120,7 +120,10 @@ router.post("/", protect, async (req, res) => {
             });
 
         }
-
+console.log(
+    "JUDGE CONFIG:",
+    problem.judge
+);
 
         // =====================================
         // CHECK TEST CASES

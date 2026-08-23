@@ -26,23 +26,35 @@ function runCppCode(code, input = "", problem) {
 
 
         // =====================================
-        // GET JUDGE INFORMATION
+        // VALIDATE JUDGE CONFIG
         // =====================================
 
-        if (!problem || !problem.judge) {
+        if (!problem) {
 
             return resolve({
                 success: false,
-                status: "Compilation Error",
-                output: "Judge configuration is missing for this problem."
+                status: "Judge Error",
+                output: "Problem data was not provided to code runner."
             });
 
         }
 
+        if (!problem.judge) {
+
+            return resolve({
+                success: false,
+                status: "Judge Error",
+                output:
+                    "Judge configuration is missing for this problem."
+            });
+
+        }
+
+
         const {
             functionName,
             returnType,
-            parameters
+            parameters = []
         } = problem.judge;
 
 
@@ -50,91 +62,9 @@ function runCppCode(code, input = "", problem) {
 
             return resolve({
                 success: false,
-                status: "Compilation Error",
-                output: "Function name is missing in judge configuration."
-            });
-
-        }
-
-
-        // =====================================
-        // CURRENTLY SUPPORT:
-        //
-        // vector<int>
-        // int
-        // =====================================
-
-        const parameterNames =
-            parameters.map(param => param.name);
-
-
-        // =====================================
-        // GENERATE FUNCTION CALL
-        // =====================================
-
-        const functionArguments =
-            parameterNames.join(", ");
-
-
-        const functionCall = `
-    ${returnType} result =
-        solution.${functionName}(${functionArguments});
-`;
-
-
-        // =====================================
-        // GENERATE OUTPUT
-        // =====================================
-
-        let outputCode = "";
-
-
-        if (returnType === "vector<int>") {
-
-            outputCode = `
-    cout << "[";
-
-    for (int i = 0; i < result.size(); i++) {
-
-        if (i > 0) {
-            cout << ",";
-        }
-
-        cout << result[i];
-    }
-
-    cout << "]";
-`;
-        }
-
-        else if (returnType === "int") {
-
-            outputCode = `
-    cout << result;
-`;
-        }
-
-        else if (returnType === "string") {
-
-            outputCode = `
-    cout << result;
-`;
-        }
-
-        else if (returnType === "bool") {
-
-            outputCode = `
-    cout << (result ? "true" : "false");
-`;
-        }
-
-        else {
-
-            return resolve({
-                success: false,
-                status: "Compilation Error",
+                status: "Judge Error",
                 output:
-                    `Unsupported return type: ${returnType}`
+                    "Function name is missing."
             });
 
         }
@@ -146,46 +76,70 @@ function runCppCode(code, input = "", problem) {
 
         let parserCode = "";
 
-        for (const parameter of parameters) {
+        for (let i = 0; i < parameters.length; i++) {
 
-            if (parameter.type === "vector<int>") {
+            const parameter = parameters[i];
+
+            const type = parameter.type;
+            const name = parameter.name;
+
+
+            // ---------------------------------
+            // vector<int>
+            // ---------------------------------
+
+            if (type === "vector<int>") {
 
                 parserCode += `
 
-    vector<int> ${parameter.name};
+    vector<int> ${name};
 
-    string ${parameter.name}Input;
+    string ${name}Input;
 
-    getline(cin, ${parameter.name}Input);
+    getline(cin, ${name}Input);
 
-    if (!${parameter.name}Input.empty() &&
-        ${parameter.name}Input.front() == '[') {
+    // Remove spaces
+    ${name}Input.erase(
+        remove(
+            ${name}Input.begin(),
+            ${name}Input.end(),
+            ' '
+        ),
+        ${name}Input.end()
+    );
 
-        ${parameter.name}Input.erase(0, 1);
+    // Remove [
+    if (
+        !${name}Input.empty() &&
+        ${name}Input.front() == '['
+    ) {
+        ${name}Input.erase(0, 1);
     }
 
-    if (!${parameter.name}Input.empty() &&
-        ${parameter.name}Input.back() == ']') {
-
-        ${parameter.name}Input.pop_back();
+    // Remove ]
+    if (
+        !${name}Input.empty() &&
+        ${name}Input.back() == ']'
+    ) {
+        ${name}Input.pop_back();
     }
 
     string currentNumber;
 
-    for (char c : ${parameter.name}Input) {
+    for (char c : ${name}Input) {
 
         if (c == ',') {
 
             if (!currentNumber.empty()) {
 
-                ${parameter.name}.push_back(
+                ${name}.push_back(
                     stoi(currentNumber)
                 );
 
                 currentNumber.clear();
             }
 
-        } else if (c != ' ') {
+        } else {
 
             currentNumber += c;
         }
@@ -193,7 +147,7 @@ function runCppCode(code, input = "", problem) {
 
     if (!currentNumber.empty()) {
 
-        ${parameter.name}.push_back(
+        ${name}.push_back(
             stoi(currentNumber)
         );
     }
@@ -201,46 +155,451 @@ function runCppCode(code, input = "", problem) {
 `;
             }
 
-            else if (parameter.type === "int") {
+
+            // ---------------------------------
+            // int
+            // ---------------------------------
+
+            else if (type === "int") {
 
                 parserCode += `
 
-    int ${parameter.name};
+    int ${name};
 
-    cin >> ${parameter.name};
+    cin >> ${name};
 
 `;
             }
 
-            else if (parameter.type === "string") {
+
+            // ---------------------------------
+            // long long
+            // ---------------------------------
+
+            else if (type === "long long") {
 
                 parserCode += `
 
-    string ${parameter.name};
+    long long ${name};
 
-    getline(cin, ${parameter.name});
+    cin >> ${name};
 
 `;
             }
+
+
+            // ---------------------------------
+            // double
+            // ---------------------------------
+
+            else if (type === "double") {
+
+                parserCode += `
+
+    double ${name};
+
+    cin >> ${name};
+
+`;
+            }
+
+
+            // ---------------------------------
+            // string
+            // ---------------------------------
+
+            else if (type === "string") {
+
+                parserCode += `
+
+    string ${name};
+
+    getline(cin, ${name});
+
+`;
+            }
+
+
+            // ---------------------------------
+            // vector<string>
+            // ---------------------------------
+
+            else if (type === "vector<string>") {
+
+                parserCode += `
+
+    vector<string> ${name};
+
+    string ${name}Input;
+
+    getline(cin, ${name}Input);
+
+    if (
+        !${name}Input.empty() &&
+        ${name}Input.front() == '['
+    ) {
+        ${name}Input.erase(0, 1);
+    }
+
+    if (
+        !${name}Input.empty() &&
+        ${name}Input.back() == ']'
+    ) {
+        ${name}Input.pop_back();
+    }
+
+    string currentValue;
+
+    for (char c : ${name}Input) {
+
+        if (c == ',') {
+
+            ${name}.push_back(
+                currentValue
+            );
+
+            currentValue.clear();
+
+        } else {
+
+            currentValue += c;
+        }
+    }
+
+    if (!currentValue.empty()) {
+
+        ${name}.push_back(
+            currentValue
+        );
+    }
+
+`;
+            }
+
+
+            // ---------------------------------
+            // vector<vector<int>>
+            // ---------------------------------
+
+            else if (type === "vector<vector<int>>") {
+
+                parserCode += `
+
+    vector<vector<int>> ${name};
+
+    string ${name}Input;
+
+    getline(cin, ${name}Input);
+
+    // Example:
+    // [[1,2],[3,4]]
+
+    if (
+        !${name}Input.empty() &&
+        ${name}Input.front() == '['
+    ) {
+        ${name}Input.erase(0, 1);
+    }
+
+    if (
+        !${name}Input.empty() &&
+        ${name}Input.back() == ']'
+    ) {
+        ${name}Input.pop_back();
+    }
+
+    vector<int> currentVector;
+
+    string currentNumber;
+
+    bool insideVector = false;
+
+    for (char c : ${name}Input) {
+
+        if (c == '[') {
+
+            insideVector = true;
+
+            currentVector.clear();
+
+        }
+
+        else if (c == ',') {
+
+            if (
+                insideVector &&
+                !currentNumber.empty()
+            ) {
+
+                currentVector.push_back(
+                    stoi(currentNumber)
+                );
+
+                currentNumber.clear();
+            }
+
+        }
+
+        else if (c == ']') {
+
+            if (
+                !currentNumber.empty()
+            ) {
+
+                currentVector.push_back(
+                    stoi(currentNumber)
+                );
+
+                currentNumber.clear();
+            }
+
+            if (insideVector) {
+
+                ${name}.push_back(
+                    currentVector
+                );
+
+                currentVector.clear();
+
+                insideVector = false;
+            }
+
+        }
+
+        else if (c != ' ') {
+
+            currentNumber += c;
+        }
+    }
+
+`;
+            }
+
+
+            // ---------------------------------
+            // UNSUPPORTED
+            // ---------------------------------
 
             else {
 
                 return resolve({
                     success: false,
-                    status: "Compilation Error",
+                    status: "Judge Error",
                     output:
-                        `Unsupported parameter type: ${parameter.type}`
+                        `Unsupported parameter type: ${type}`
                 });
 
             }
+
         }
 
 
         // =====================================
-        // COMPLETE C++ DRIVER
+        // FUNCTION ARGUMENTS
+        // =====================================
+
+        const functionArguments =
+            parameters
+                .map(parameter => parameter.name)
+                .join(", ");
+
+
+        // =====================================
+        // FUNCTION CALL
+        // =====================================
+
+        const functionCall = `
+
+    Solution solution;
+
+    ${returnType} result =
+        solution.${functionName}(
+            ${functionArguments}
+        );
+
+`;
+
+
+        // =====================================
+        // OUTPUT GENERATOR
+        // =====================================
+
+        let outputCode = "";
+
+
+        // vector<int>
+        if (returnType === "vector<int>") {
+
+            outputCode = `
+
+    cout << "[";
+
+    for (
+        int i = 0;
+        i < result.size();
+        i++
+    ) {
+
+        if (i > 0) {
+            cout << ",";
+        }
+
+        cout << result[i];
+    }
+
+    cout << "]";
+
+`;
+        }
+
+
+        // vector<string>
+        else if (returnType === "vector<string>") {
+
+            outputCode = `
+
+    cout << "[";
+
+    for (
+        int i = 0;
+        i < result.size();
+        i++
+    ) {
+
+        if (i > 0) {
+            cout << ",";
+        }
+
+        cout << result[i];
+    }
+
+    cout << "]";
+
+`;
+        }
+
+
+        // int
+        else if (returnType === "int") {
+
+            outputCode = `
+
+    cout << result;
+
+`;
+        }
+
+
+        // long long
+        else if (returnType === "long long") {
+
+            outputCode = `
+
+    cout << result;
+
+`;
+        }
+
+
+        // double
+        else if (returnType === "double") {
+
+            outputCode = `
+
+    cout << result;
+
+`;
+        }
+
+
+        // string
+        else if (returnType === "string") {
+
+            outputCode = `
+
+    cout << result;
+
+`;
+        }
+
+
+        // bool
+        else if (returnType === "bool") {
+
+            outputCode = `
+
+    cout << (result ? "true" : "false");
+
+`;
+        }
+
+
+        // vector<vector<int>>
+        else if (
+            returnType ===
+            "vector<vector<int>>"
+        ) {
+
+            outputCode = `
+
+    cout << "[";
+
+    for (
+        int i = 0;
+        i < result.size();
+        i++
+    ) {
+
+        if (i > 0) {
+            cout << ",";
+        }
+
+        cout << "[";
+
+        for (
+            int j = 0;
+            j < result[i].size();
+            j++
+        ) {
+
+            if (j > 0) {
+                cout << ",";
+            }
+
+            cout << result[i][j];
+        }
+
+        cout << "]";
+    }
+
+    cout << "]";
+
+`;
+        }
+
+
+        // ---------------------------------
+        // UNSUPPORTED RETURN TYPE
+        // ---------------------------------
+
+        else {
+
+            return resolve({
+                success: false,
+                status: "Judge Error",
+                output:
+                    `Unsupported return type: ${returnType}`
+            });
+
+        }
+
+
+        // =====================================
+        // CREATE COMPLETE C++ PROGRAM
         // =====================================
 
         const driverCode = `
+
 #include <iostream>
 #include <vector>
 #include <string>
@@ -250,7 +609,7 @@ using namespace std;
 
 
 // =====================================
-// USER CODE
+// USER SOLUTION
 // =====================================
 
 ${code}
@@ -264,19 +623,18 @@ int main() {
 
 ${parserCode}
 
-    Solution solution;
-
 ${functionCall}
 
 ${outputCode}
 
     return 0;
 }
+
 `;
 
 
         // =====================================
-        // WRITE C++ FILE
+        // WRITE FILE
         // =====================================
 
         fs.writeFileSync(
@@ -312,12 +670,18 @@ ${outputCode}
                     );
 
                     return resolve({
+
                         success: false,
-                        status: "Compilation Error",
+
+                        status:
+                            "Compilation Error",
+
                         output:
                             stderr ||
                             compileError.message
+
                     });
+
                 }
 
 
@@ -331,28 +695,46 @@ ${outputCode}
                         timeout: 5000
                     },
 
-                    (runError, stdout, stderr) => {
+                    (
+                        runError,
+                        stdout,
+                        stderr
+                    ) => {
 
                         cleanup(
                             cppFile,
                             exeFile
                         );
 
+
                         if (runError) {
 
                             return resolve({
+
                                 success: false,
-                                status: "Runtime Error",
+
+                                status:
+                                    "Runtime Error",
+
                                 output:
                                     stderr ||
                                     runError.message
+
                             });
+
                         }
 
+
                         resolve({
+
                             success: true,
-                            status: "Success",
-                            output: stdout.trim()
+
+                            status:
+                                "Success",
+
+                            output:
+                                stdout.trim()
+
                         });
 
                     }
@@ -364,7 +746,11 @@ ${outputCode}
                 // =====================================
 
                 if (input) {
-                    child.stdin.write(input);
+
+                    child.stdin.write(
+                        input
+                    );
+
                 }
 
                 child.stdin.end();
@@ -380,16 +766,31 @@ ${outputCode}
 // CLEANUP
 // =====================================
 
-function cleanup(cppFile, exeFile) {
+function cleanup(
+    cppFile,
+    exeFile
+) {
 
     try {
 
-        if (fs.existsSync(cppFile)) {
-            fs.unlinkSync(cppFile);
+        if (
+            fs.existsSync(cppFile)
+        ) {
+
+            fs.unlinkSync(
+                cppFile
+            );
+
         }
 
-        if (fs.existsSync(exeFile)) {
-            fs.unlinkSync(exeFile);
+        if (
+            fs.existsSync(exeFile)
+        ) {
+
+            fs.unlinkSync(
+                exeFile
+            );
+
         }
 
     } catch (error) {
@@ -398,7 +799,9 @@ function cleanup(cppFile, exeFile) {
             "Cleanup error:",
             error.message
         );
+
     }
+
 }
 
 

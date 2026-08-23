@@ -25,26 +25,10 @@ function runCppCode(code, input = "") {
             `${fileName}.exe`
         );
 
-        /*
-         * ==========================================
-         * CREATE DRIVER CODE
-         * ==========================================
-         *
-         * The user writes LeetCode-style code:
-         *
-         * class Solution {
-         * public:
-         *     vector<int> twoSum(...);
-         * };
-         *
-         * We automatically add:
-         *
-         * - required headers
-         * - using namespace std
-         * - main()
-         * - test case input
-         * - function call
-         */
+
+        // =====================================
+        // GENERATE C++ DRIVER
+        // =====================================
 
         const driverCode = `
 #include <iostream>
@@ -54,50 +38,130 @@ function runCppCode(code, input = "") {
 
 using namespace std;
 
+
+// =====================================
+// USER SOLUTION
+// =====================================
+
 ${code}
+
+
+// =====================================
+// MAIN DRIVER
+// =====================================
 
 int main() {
 
     vector<int> nums;
     int target;
 
-    int n;
+    /*
+     * Input format:
+     *
+     * [2,7,11,15]
+     * 9
+     */
 
-    cin >> n;
+    string arrayInput;
 
-    for (int i = 0; i < n; i++) {
+    getline(cin, arrayInput);
 
-        int x;
-        cin >> x;
-
-        nums.push_back(x);
+    // Remove '[' and ']'
+    if (!arrayInput.empty() && arrayInput.front() == '[') {
+        arrayInput.erase(0, 1);
     }
 
+    if (!arrayInput.empty() && arrayInput.back() == ']') {
+        arrayInput.pop_back();
+    }
+
+
+    // Parse numbers
+    string currentNumber;
+
+    for (char c : arrayInput) {
+
+        if (c == ',') {
+
+            if (!currentNumber.empty()) {
+
+                nums.push_back(
+                    stoi(currentNumber)
+                );
+
+                currentNumber.clear();
+            }
+
+        } else if (c != ' ') {
+
+            currentNumber += c;
+        }
+    }
+
+
+    // Add last number
+    if (!currentNumber.empty()) {
+
+        nums.push_back(
+            stoi(currentNumber)
+        );
+    }
+
+
+    // Read target
     cin >> target;
+
+
+    // =====================================
+    // CALL USER FUNCTION
+    // =====================================
 
     Solution solution;
 
     vector<int> result =
-        solution.twoSum(nums, target);
+        solution.twoSum(
+            nums,
+            target
+        );
 
-    for (int i = 0; i < result.size(); i++) {
 
-        if (i > 0)
-            cout << " ";
+    // =====================================
+    // OUTPUT FORMAT
+    // =====================================
+
+    cout << "[";
+
+    for (
+        int i = 0;
+        i < result.size();
+        i++
+    ) {
+
+        if (i > 0) {
+            cout << ",";
+        }
 
         cout << result[i];
     }
+
+    cout << "]";
+
 
     return 0;
 }
 `;
 
-        // Write generated C++ file
+
+        // =====================================
+        // WRITE CPP FILE
+        // =====================================
+
         fs.writeFileSync(
             cppFile,
             driverCode,
             "utf8"
         );
+
 
         // =====================================
         // COMPILE
@@ -114,6 +178,7 @@ int main() {
             {
                 timeout: 10000
             },
+
             (compileError, stdout, stderr) => {
 
                 if (compileError) {
@@ -135,8 +200,8 @@ int main() {
                             compileError.message
 
                     });
-
                 }
+
 
                 // =====================================
                 // RUN PROGRAM
@@ -144,15 +209,18 @@ int main() {
 
                 const child = execFile(
                     exeFile,
+
                     {
                         timeout: 5000
                     },
+
                     (runError, stdout, stderr) => {
 
                         cleanup(
                             cppFile,
                             exeFile
                         );
+
 
                         if (runError) {
 
@@ -168,8 +236,8 @@ int main() {
                                     runError.message
 
                             });
-
                         }
+
 
                         resolve({
 
@@ -185,8 +253,9 @@ int main() {
                     }
                 );
 
+
                 // =====================================
-                // SEND TEST INPUT
+                // SEND TEST CASE INPUT
                 // =====================================
 
                 if (input) {
@@ -222,7 +291,6 @@ function cleanup(
             fs.unlinkSync(
                 cppFile
             );
-
         }
 
         if (fs.existsSync(exeFile)) {
@@ -230,7 +298,6 @@ function cleanup(
             fs.unlinkSync(
                 exeFile
             );
-
         }
 
     } catch (error) {
@@ -239,9 +306,7 @@ function cleanup(
             "Cleanup error:",
             error.message
         );
-
     }
-
 }
 
 

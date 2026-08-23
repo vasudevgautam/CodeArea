@@ -2,13 +2,12 @@ const fs = require("fs");
 const path = require("path");
 const { execFile } = require("child_process");
 
-function runCppCode(code, input = "") {
+function runCppCode(code, input = "", problem) {
 
     return new Promise((resolve) => {
 
         const tempDir = path.join(__dirname, "../temp");
 
-        // Create temp folder
         if (!fs.existsSync(tempDir)) {
             fs.mkdirSync(tempDir, { recursive: true });
         }
@@ -27,65 +26,159 @@ function runCppCode(code, input = "") {
 
 
         // =====================================
-        // GENERATE C++ DRIVER
+        // GET JUDGE INFORMATION
         // =====================================
 
-        const driverCode = `
-#include <iostream>
-#include <vector>
-#include <string>
-#include <algorithm>
+        if (!problem || !problem.judge) {
 
-using namespace std;
+            return resolve({
+                success: false,
+                status: "Compilation Error",
+                output: "Judge configuration is missing for this problem."
+            });
+
+        }
+
+        const {
+            functionName,
+            returnType,
+            parameters
+        } = problem.judge;
 
 
-// =====================================
-// USER SOLUTION
-// =====================================
+        if (!functionName) {
 
-${code}
+            return resolve({
+                success: false,
+                status: "Compilation Error",
+                output: "Function name is missing in judge configuration."
+            });
+
+        }
 
 
-// =====================================
-// MAIN DRIVER
-// =====================================
+        // =====================================
+        // CURRENTLY SUPPORT:
+        //
+        // vector<int>
+        // int
+        // =====================================
 
-int main() {
+        const parameterNames =
+            parameters.map(param => param.name);
 
-    vector<int> nums;
-    int target;
 
-    /*
-     * Input format:
-     *
-     * [2,7,11,15]
-     * 9
-     */
+        // =====================================
+        // GENERATE FUNCTION CALL
+        // =====================================
 
-    string arrayInput;
+        const functionArguments =
+            parameterNames.join(", ");
 
-    getline(cin, arrayInput);
 
-    // Remove '[' and ']'
-    if (!arrayInput.empty() && arrayInput.front() == '[') {
-        arrayInput.erase(0, 1);
+        const functionCall = `
+    ${returnType} result =
+        solution.${functionName}(${functionArguments});
+`;
+
+
+        // =====================================
+        // GENERATE OUTPUT
+        // =====================================
+
+        let outputCode = "";
+
+
+        if (returnType === "vector<int>") {
+
+            outputCode = `
+    cout << "[";
+
+    for (int i = 0; i < result.size(); i++) {
+
+        if (i > 0) {
+            cout << ",";
+        }
+
+        cout << result[i];
     }
 
-    if (!arrayInput.empty() && arrayInput.back() == ']') {
-        arrayInput.pop_back();
+    cout << "]";
+`;
+        }
+
+        else if (returnType === "int") {
+
+            outputCode = `
+    cout << result;
+`;
+        }
+
+        else if (returnType === "string") {
+
+            outputCode = `
+    cout << result;
+`;
+        }
+
+        else if (returnType === "bool") {
+
+            outputCode = `
+    cout << (result ? "true" : "false");
+`;
+        }
+
+        else {
+
+            return resolve({
+                success: false,
+                status: "Compilation Error",
+                output:
+                    `Unsupported return type: ${returnType}`
+            });
+
+        }
+
+
+        // =====================================
+        // GENERATE INPUT PARSER
+        // =====================================
+
+        let parserCode = "";
+
+        for (const parameter of parameters) {
+
+            if (parameter.type === "vector<int>") {
+
+                parserCode += `
+
+    vector<int> ${parameter.name};
+
+    string ${parameter.name}Input;
+
+    getline(cin, ${parameter.name}Input);
+
+    if (!${parameter.name}Input.empty() &&
+        ${parameter.name}Input.front() == '[') {
+
+        ${parameter.name}Input.erase(0, 1);
     }
 
+    if (!${parameter.name}Input.empty() &&
+        ${parameter.name}Input.back() == ']') {
 
-    // Parse numbers
+        ${parameter.name}Input.pop_back();
+    }
+
     string currentNumber;
 
-    for (char c : arrayInput) {
+    for (char c : ${parameter.name}Input) {
 
         if (c == ',') {
 
             if (!currentNumber.empty()) {
 
-                nums.push_back(
+                ${parameter.name}.push_back(
                     stoi(currentNumber)
                 );
 
@@ -98,54 +191,84 @@ int main() {
         }
     }
 
-
-    // Add last number
     if (!currentNumber.empty()) {
 
-        nums.push_back(
+        ${parameter.name}.push_back(
             stoi(currentNumber)
         );
     }
 
+`;
+            }
 
-    // Read target
-    cin >> target;
+            else if (parameter.type === "int") {
+
+                parserCode += `
+
+    int ${parameter.name};
+
+    cin >> ${parameter.name};
+
+`;
+            }
+
+            else if (parameter.type === "string") {
+
+                parserCode += `
+
+    string ${parameter.name};
+
+    getline(cin, ${parameter.name});
+
+`;
+            }
+
+            else {
+
+                return resolve({
+                    success: false,
+                    status: "Compilation Error",
+                    output:
+                        `Unsupported parameter type: ${parameter.type}`
+                });
+
+            }
+        }
 
 
-    // =====================================
-    // CALL USER FUNCTION
-    // =====================================
+        // =====================================
+        // COMPLETE C++ DRIVER
+        // =====================================
+
+        const driverCode = `
+#include <iostream>
+#include <vector>
+#include <string>
+#include <algorithm>
+
+using namespace std;
+
+
+// =====================================
+// USER CODE
+// =====================================
+
+${code}
+
+
+// =====================================
+// DRIVER
+// =====================================
+
+int main() {
+
+${parserCode}
 
     Solution solution;
 
-    vector<int> result =
-        solution.twoSum(
-            nums,
-            target
-        );
+${functionCall}
 
-
-    // =====================================
-    // OUTPUT FORMAT
-    // =====================================
-
-    cout << "[";
-
-    for (
-        int i = 0;
-        i < result.size();
-        i++
-    ) {
-
-        if (i > 0) {
-            cout << ",";
-        }
-
-        cout << result[i];
-    }
-
-    cout << "]";
-
+${outputCode}
 
     return 0;
 }
@@ -153,7 +276,7 @@ int main() {
 
 
         // =====================================
-        // WRITE CPP FILE
+        // WRITE C++ FILE
         // =====================================
 
         fs.writeFileSync(
@@ -189,27 +312,21 @@ int main() {
                     );
 
                     return resolve({
-
                         success: false,
-
-                        status:
-                            "Compilation Error",
-
+                        status: "Compilation Error",
                         output:
                             stderr ||
                             compileError.message
-
                     });
                 }
 
 
                 // =====================================
-                // RUN PROGRAM
+                // RUN
                 // =====================================
 
                 const child = execFile(
                     exeFile,
-
                     {
                         timeout: 5000
                     },
@@ -221,33 +338,21 @@ int main() {
                             exeFile
                         );
 
-
                         if (runError) {
 
                             return resolve({
-
                                 success: false,
-
-                                status:
-                                    "Runtime Error",
-
+                                status: "Runtime Error",
                                 output:
                                     stderr ||
                                     runError.message
-
                             });
                         }
 
-
                         resolve({
-
                             success: true,
-
                             status: "Success",
-
-                            output:
-                                stdout.trim()
-
+                            output: stdout.trim()
                         });
 
                     }
@@ -255,15 +360,11 @@ int main() {
 
 
                 // =====================================
-                // SEND TEST CASE INPUT
+                // SEND INPUT
                 // =====================================
 
                 if (input) {
-
-                    child.stdin.write(
-                        input
-                    );
-
+                    child.stdin.write(input);
                 }
 
                 child.stdin.end();
@@ -279,25 +380,16 @@ int main() {
 // CLEANUP
 // =====================================
 
-function cleanup(
-    cppFile,
-    exeFile
-) {
+function cleanup(cppFile, exeFile) {
 
     try {
 
         if (fs.existsSync(cppFile)) {
-
-            fs.unlinkSync(
-                cppFile
-            );
+            fs.unlinkSync(cppFile);
         }
 
         if (fs.existsSync(exeFile)) {
-
-            fs.unlinkSync(
-                exeFile
-            );
+            fs.unlinkSync(exeFile);
         }
 
     } catch (error) {

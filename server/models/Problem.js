@@ -1,4 +1,10 @@
 const mongoose = require("mongoose");
+
+
+// =====================================
+// TEST CASE SCHEMA
+// =====================================
+
 const testCaseSchema = new mongoose.Schema(
     {
         input: {
@@ -25,6 +31,60 @@ const testCaseSchema = new mongoose.Schema(
         _id: false
     }
 );
+
+
+// =====================================
+// JUDGE PARAMETER SCHEMA
+// =====================================
+
+const judgeParameterSchema = new mongoose.Schema(
+    {
+        type: {
+            type: String,
+            required: true
+        },
+
+        name: {
+            type: String,
+            required: true
+        }
+    },
+    {
+        _id: false
+    }
+);
+
+
+// =====================================
+// JUDGE SCHEMA
+// =====================================
+
+const judgeSchema = new mongoose.Schema(
+    {
+        functionName: {
+            type: String,
+            required: true
+        },
+
+        returnType: {
+            type: String,
+            required: true
+        },
+
+        parameters: {
+            type: [judgeParameterSchema],
+            default: []
+        }
+    },
+    {
+        _id: false
+    }
+);
+
+
+// =====================================
+// PROBLEM SCHEMA
+// =====================================
 
 const problemSchema = new mongoose.Schema(
     {
@@ -77,7 +137,27 @@ const problemSchema = new mongoose.Schema(
             }
         ],
 
+
+        // =====================================
+        // TEST CASES
+        // =====================================
+
         testCases: [testCaseSchema],
+
+
+        // =====================================
+        // JUDGE CONFIGURATION
+        // =====================================
+
+        judge: {
+            type: judgeSchema,
+            required: true
+        },
+
+
+        // =====================================
+        // STARTER CODE
+        // =====================================
 
         starterCode: {
             cpp: {
@@ -96,6 +176,11 @@ const problemSchema = new mongoose.Schema(
             }
         },
 
+
+        // =====================================
+        // STATISTICS
+        // =====================================
+
         acceptedCount: {
             type: Number,
             default: 0
@@ -106,9 +191,12 @@ const problemSchema = new mongoose.Schema(
             default: 0
         }
     },
+
     {
         timestamps: true
     }
 );
 
-module.exports = mongoose.model("Problem", problemSchema);
+
+module.exports =
+    mongoose.model("Problem", problemSchema);

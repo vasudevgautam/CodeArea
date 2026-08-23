@@ -88,10 +88,6 @@ const judgeSchema = new mongoose.Schema(
 
 const problemSchema = new mongoose.Schema(
     {
-        // =====================================
-        // BASIC INFORMATION
-        // =====================================
-
         title: {
             type: String,
             required: true,
@@ -137,44 +133,20 @@ const problemSchema = new mongoose.Schema(
             }
         ],
 
-
-        // =====================================
-        // EXAMPLES
-        // =====================================
-
         examples: [
             {
-                input: {
-                    type: String
-                },
-
-                output: {
-                    type: String
-                },
-
-                explanation: {
-                    type: String
-                }
+                input: String,
+                output: String,
+                explanation: String
             }
         ],
-
-
-        // =====================================
-        // TEST CASES
-        // =====================================
 
         testCases: {
             type: [testCaseSchema],
             default: []
         },
 
-
-        // =====================================
-        // STARTER CODE
-        // =====================================
-
         starterCode: {
-
             cpp: {
                 type: String,
                 default: ""
@@ -189,24 +161,16 @@ const problemSchema = new mongoose.Schema(
                 type: String,
                 default: ""
             }
-
         },
 
-
         // =====================================
-        // JUDGE CONFIGURATION
+        // FLEXIBLE JUDGE CONFIGURATION
         // =====================================
 
         judge: {
             type: judgeSchema,
-            required: false,
             default: null
         },
-
-
-        // =====================================
-        // STATISTICS
-        // =====================================
 
         acceptedCount: {
             type: Number,
@@ -217,7 +181,6 @@ const problemSchema = new mongoose.Schema(
             type: Number,
             default: 0
         }
-
     },
 
     {
@@ -225,10 +188,6 @@ const problemSchema = new mongoose.Schema(
     }
 );
 
-
-// =====================================
-// EXPORT MODEL
-// =====================================
 
 module.exports =
     mongoose.model(

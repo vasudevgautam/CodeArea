@@ -120,10 +120,9 @@ router.post("/", protect, async (req, res) => {
             });
 
         }
-console.log(
-    "JUDGE CONFIG:",
-    problem.judge
-);
+console.log("PROBLEM ID:", problemId);
+console.log("PROBLEM:", problem);
+console.log("JUDGE:", problem.judge);
 
         // =====================================
         // CHECK TEST CASES

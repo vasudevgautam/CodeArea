@@ -121,7 +121,7 @@ router.post("/", protect, async (req, res) => {
 
         }
 console.log("PROBLEM ID:", problemId);
-console.log("PROBLEM:", problem);
+
 console.log("JUDGE:", problem.judge);
 
         // =====================================
@@ -169,7 +169,7 @@ console.log("JUDGE:", problem.judge);
             );
 
 
-           const result =
+       const result =
     await runCppCode(
         code,
         testCase.input,

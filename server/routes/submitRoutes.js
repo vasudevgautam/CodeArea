@@ -227,7 +227,12 @@ router.post("/", protect, async (req, res) => {
             // IMPORTANT
             // PASS PROBLEM TO RUNNER
             // =====================================
-
+            console.log("========== JUDGE DEBUG ==========");
+console.log("problemId:", problemId);
+console.log("problem exists:", !!problem);
+console.log("problem title:", problem?.title);
+console.log("problem judge:", problem?.judge);
+console.log("=================================");
             const result =
                 await runCppCode(
                     code,

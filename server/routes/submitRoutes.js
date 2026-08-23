@@ -3,11 +3,13 @@ const router = express.Router();
 
 const Problem = require("../models/Problem");
 const Submission = require("../models/Submission");
+
 const { protect } = require("../middleware/authMiddleware");
 
 const {
     runCppCode
 } = require("../utils/codeRunner");
+
 
 // =====================================
 // GET SUBMISSION HISTORY
@@ -46,13 +48,16 @@ router.get("/:problemId", async (req, res) => {
 
             success: false,
 
-            message: "Failed to get submissions"
+            message:
+                "Failed to get submissions"
 
         });
 
     }
 
 });
+
+
 // =====================================
 // SUBMIT SOLUTION
 // =====================================
@@ -67,7 +72,9 @@ router.post("/", protect, async (req, res) => {
             language
         } = req.body;
 
-        const userId = req.user.userId;
+
+        const userId =
+            req.user.userId;
 
 
         // =====================================
@@ -77,8 +84,12 @@ router.post("/", protect, async (req, res) => {
         if (!problemId) {
 
             return res.status(400).json({
+
                 success: false,
-                message: "Problem ID is required"
+
+                message:
+                    "Problem ID is required"
+
             });
 
         }
@@ -87,8 +98,12 @@ router.post("/", protect, async (req, res) => {
         if (!code) {
 
             return res.status(400).json({
+
                 success: false,
-                message: "Code is required"
+
+                message:
+                    "Code is required"
+
             });
 
         }
@@ -97,8 +112,12 @@ router.post("/", protect, async (req, res) => {
         if (language !== "cpp") {
 
             return res.status(400).json({
+
                 success: false,
-                message: "Currently only C++ is supported"
+
+                message:
+                    "Currently only C++ is supported"
+
             });
 
         }
@@ -115,14 +134,45 @@ router.post("/", protect, async (req, res) => {
         if (!problem) {
 
             return res.status(404).json({
+
                 success: false,
-                message: "Problem not found"
+
+                message:
+                    "Problem not found"
+
             });
 
         }
-// console.log("PROBLEM ID:", problemId);
 
-// console.log("JUDGE:", problem.judge);
+
+        console.log(
+            "Problem loaded:",
+            problem.title
+        );
+
+        console.log(
+            "Judge configuration:",
+            problem.judge
+        );
+
+
+        // =====================================
+        // CHECK JUDGE CONFIG
+        // =====================================
+
+        if (!problem.judge) {
+
+            return res.status(400).json({
+
+                success: false,
+
+                message:
+                    "Judge configuration is missing for this problem."
+
+            });
+
+        }
+
 
         // =====================================
         // CHECK TEST CASES
@@ -134,8 +184,12 @@ router.post("/", protect, async (req, res) => {
         ) {
 
             return res.status(400).json({
+
                 success: false,
-                message: "No test cases available"
+
+                message:
+                    "No test cases available"
+
             });
 
         }
@@ -168,13 +222,18 @@ router.post("/", protect, async (req, res) => {
                 `Running test case ${i + 1}/${problem.testCases.length}`
             );
 
-console.log("PROBLEM SENT TO RUNNER:", problem);
-       const result =
-    await runCppCode(
-        code,
-        testCase.input,
-        problem
-    );
+
+            // =====================================
+            // IMPORTANT
+            // PASS PROBLEM TO RUNNER
+            // =====================================
+
+            const result =
+                await runCppCode(
+                    code,
+                    testCase.input,
+                    problem
+                );
 
 
             // =====================================
@@ -191,7 +250,9 @@ console.log("PROBLEM SENT TO RUNNER:", problem);
                     compilationError =
                         result.output;
 
-                } else {
+                }
+
+                else {
 
                     runtimeError =
                         result.output;
@@ -199,6 +260,7 @@ console.log("PROBLEM SENT TO RUNNER:", problem);
                 }
 
                 break;
+
             }
 
 
@@ -208,6 +270,7 @@ console.log("PROBLEM SENT TO RUNNER:", problem);
 
             const actualOutput =
                 result.output.trim();
+
 
             const expectedOutput =
                 testCase.output.trim();
@@ -220,7 +283,9 @@ console.log("PROBLEM SENT TO RUNNER:", problem);
 
                 passed++;
 
-            } else {
+            }
+
+            else {
 
                 failedTestCase = {
 
@@ -239,7 +304,9 @@ console.log("PROBLEM SENT TO RUNNER:", problem);
                 };
 
                 break;
+
             }
+
         }
 
 
@@ -251,17 +318,23 @@ console.log("PROBLEM SENT TO RUNNER:", problem);
 
             await Submission.create({
 
-                problemId: problemId,
+                problemId:
+                    problemId,
 
-                userId,
+                userId:
+                    userId,
 
-                language: language,
+                language:
+                    language,
 
-                code: code,
+                code:
+                    code,
 
-                status: "Compilation Error",
+                status:
+                    "Compilation Error",
 
-                passed: passed,
+                passed:
+                    passed,
 
                 total:
                     problem.testCases.length,
@@ -276,9 +349,11 @@ console.log("PROBLEM SENT TO RUNNER:", problem);
 
                 success: false,
 
-                status: "Compilation Error",
+                status:
+                    "Compilation Error",
 
-                passed: passed,
+                passed:
+                    passed,
 
                 total:
                     problem.testCases.length,
@@ -299,17 +374,23 @@ console.log("PROBLEM SENT TO RUNNER:", problem);
 
             await Submission.create({
 
-                problemId: problemId,
+                problemId:
+                    problemId,
 
-                userId,
+                userId:
+                    userId,
 
-                language: language,
+                language:
+                    language,
 
-                code: code,
+                code:
+                    code,
 
-                status: "Runtime Error",
+                status:
+                    "Runtime Error",
 
-                passed: passed,
+                passed:
+                    passed,
 
                 total:
                     problem.testCases.length,
@@ -324,9 +405,11 @@ console.log("PROBLEM SENT TO RUNNER:", problem);
 
                 success: false,
 
-                status: "Runtime Error",
+                status:
+                    "Runtime Error",
 
-                passed: passed,
+                passed:
+                    passed,
 
                 total:
                     problem.testCases.length,
@@ -347,17 +430,23 @@ console.log("PROBLEM SENT TO RUNNER:", problem);
 
             await Submission.create({
 
-                problemId: problemId,
+                problemId:
+                    problemId,
 
-                userId,
+                userId:
+                    userId,
 
-                language: language,
+                language:
+                    language,
 
-                code: code,
+                code:
+                    code,
 
-                status: "Wrong Answer",
+                status:
+                    "Wrong Answer",
 
-                passed: passed,
+                passed:
+                    passed,
 
                 total:
                     problem.testCases.length,
@@ -372,9 +461,11 @@ console.log("PROBLEM SENT TO RUNNER:", problem);
 
                 success: false,
 
-                status: "Wrong Answer",
+                status:
+                    "Wrong Answer",
 
-                passed: passed,
+                passed:
+                    passed,
 
                 total:
                     problem.testCases.length,
@@ -402,17 +493,23 @@ console.log("PROBLEM SENT TO RUNNER:", problem);
 
         await Submission.create({
 
-            problemId: problemId,
+            problemId:
+                problemId,
 
-            userId,
+            userId:
+                userId,
 
-            language: language,
+            language:
+                language,
 
-            code: code,
+            code:
+                code,
 
-            status: "Accepted",
+            status:
+                "Accepted",
 
-            passed: passed,
+            passed:
+                passed,
 
             total:
                 problem.testCases.length,
@@ -427,9 +524,11 @@ console.log("PROBLEM SENT TO RUNNER:", problem);
 
             success: true,
 
-            status: "Accepted",
+            status:
+                "Accepted",
 
-            passed: passed,
+            passed:
+                passed,
 
             total:
                 problem.testCases.length,

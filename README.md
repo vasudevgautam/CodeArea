@@ -1,105 +1,175 @@
-# CodeArea
+# 🚀 CodeArea
 
-> A full-stack competitive programming platform where users can solve coding problems, submit solutions, bookmark problems, and track their submission history and progress.
+> A full-stack competitive programming platform where users can discover coding problems, solve them, submit solutions, bookmark problems, and track their coding progress.
+
+[![Live Demo](https://img.shields.io/badge/Live-Demo-success)](https://codearea-56cz.onrender.com)
+[![Frontend](https://img.shields.io/badge/Frontend-React-blue)](https://react.dev/)
+[![Backend](https://img.shields.io/badge/Backend-Node.js-green)](https://nodejs.org/)
+[![Database](https://img.shields.io/badge/Database-MongoDB-brightgreen)](https://www.mongodb.com/)
+[![Deployment](https://img.shields.io/badge/Deployed-Render-purple)](https://render.com/)
 
 ---
 
-## 🚀 Overview
+## 🌐 Live Demo
+
+**CodeArea:**
+https://codearea-56cz.onrender.com
+
+The application is deployed with:
+
+* React + Vite frontend
+* Node.js + Express backend
+* MongoDB Atlas database
+* Render deployment
+
+---
+
+# 📖 Overview
 
 **CodeArea** is a full-stack coding practice platform inspired by modern competitive programming websites.
 
-The platform provides a clean environment for users to:
+It provides users with a complete environment to:
 
-* 🔐 Create an account and log in
+* 🔐 Create an account and authenticate securely
 * 📚 Browse coding problems
 * 💻 View detailed problem statements
 * 🧑‍💻 Write and submit solutions
 * 📊 Track submission results
-* 🔖 Bookmark problems for later
+* 🔖 Bookmark problems
 * 📜 View submission history
-* 👤 View their coding profile
+* 👤 Manage their coding profile
 * 📈 Track solving and submission statistics
 
-The project is built with a **React frontend**, **Node.js + Express backend**, and **MongoDB database**.
+The project was built to understand how a real-world full-stack application works from frontend UI to backend APIs and database operations.
 
 ---
 
-## ✨ Features
+# ✨ Features
 
-### 🔐 Authentication
+## 🔐 Authentication
 
 * User registration
 * User login
 * JWT-based authentication
 * Protected routes
-* Persistent login using browser local storage
+* Persistent authentication
 * Logout functionality
+* Authorization using Bearer tokens
 
-### 📚 Problem Management
+---
 
-* Browse available coding problems
+## 📚 Problem Management
+
+* Browse coding problems
 * View individual problem details
-* Problems organized by difficulty/category
+* Problem difficulty information
+* Problem categories
 * Dynamic problem pages using URL slugs
-* Problem-solving interface with code editor
+* Dedicated problem-solving interface
 
-### 💻 Code Submission
+Example:
 
-* Submit solutions directly from the problem page
-* Backend submission processing
-* Submission status tracking
-* Support for programming language information
-* Submission history for individual problems
+```text
+/problems
+/problems/two-sum
+```
 
-### 🔖 Bookmarks
+---
 
-* Bookmark coding problems
+## 💻 Code Submission
+
+Users can submit their solutions directly from the problem page.
+
+Submission flow:
+
+```text
+Write Code
+    ↓
+Submit Solution
+    ↓
+Frontend API Request
+    ↓
+Express Backend
+    ↓
+Submission Processing
+    ↓
+Submission Result
+    ↓
+Stored in Database
+```
+
+Submission information includes:
+
+* User
+* Problem
+* Programming language
+* Submitted code
+* Status
+* Submission timestamp
+
+---
+
+## 🔖 Bookmarks
+
+Users can save problems for later.
+
+Features include:
+
+* Add bookmark
+* Remove bookmark
 * View saved problems
-* Remove bookmarks
-* Quickly navigate from bookmarks to problem pages
-* Empty-state UI when no problems are saved
+* Navigate directly to bookmarked problems
+* Empty-state UI
 
-### 📜 Submission History
+---
 
-Users can view their previous submissions for a problem, including:
+## 📜 Submission History
+
+Users can view previous submissions associated with problems.
+
+Displayed information includes:
 
 * Submission number
 * Programming language
 * Submission status
 * Submission date and time
 
-Supported status styles include:
+Supported status displays include:
 
 * ✅ Accepted
 * ❌ Wrong Answer
 * ❌ Failed
 * ⏳ Pending
 
-### 👤 Profile
+---
 
-The profile section provides:
+## 👤 User Profile
 
-* User avatar
-* Username/name
+The profile section provides information such as:
+
+* User name
 * Email
+* Avatar
 * Total submissions
 * Accepted submissions
 * Problems solved
-* Account ID
+* Account information
 * Logout option
 
-### 🎨 Modern UI
+---
 
-The application uses a dark developer-focused interface with:
+## 🎨 Modern Responsive UI
 
+The application includes a developer-focused interface with:
+
+* Dark-themed UI
 * Responsive layouts
-* Gradient backgrounds
-* Hover animations
 * Interactive cards
-* Responsive mobile design
+* Hover effects
 * Loading states
 * Error states
 * Empty states
+* Mobile-friendly layouts
 
 ---
 
@@ -107,14 +177,14 @@ The application uses a dark developer-focused interface with:
 
 ## Frontend
 
-| Technology   | Purpose                         |
-| ------------ | ------------------------------- |
-| React.js     | User interface                  |
-| React Router | Client-side routing             |
-| Axios        | API communication               |
-| JavaScript   | Application logic               |
-| CSS3         | Styling and responsive UI       |
-| Vite         | Frontend development/build tool |
+| Technology   | Purpose                       |
+| ------------ | ----------------------------- |
+| React.js     | User interface                |
+| React Router | Client-side routing           |
+| Axios        | API communication             |
+| JavaScript   | Application logic             |
+| CSS3         | Styling and responsive design |
+| Vite         | Development and build tool    |
 
 ## Backend
 
@@ -122,16 +192,63 @@ The application uses a dark developer-focused interface with:
 | ---------- | -------------------------- |
 | Node.js    | Runtime environment        |
 | Express.js | REST API framework         |
-| MongoDB    | Database                   |
 | Mongoose   | MongoDB object modeling    |
 | JWT        | Authentication             |
-| Axios      | External/API requests      |
+| Axios      | API communication          |
 | CORS       | Cross-origin communication |
 | Nodemon    | Development server         |
 
+## Database & Deployment
+
+| Technology    | Purpose                         |
+| ------------- | ------------------------------- |
+| MongoDB Atlas | Cloud database                  |
+| Render        | Frontend and backend deployment |
+| Git           | Version control                 |
+| GitHub        | Source code hosting             |
+
 ---
 
-# 🏗️ Project Architecture
+# 🏗️ System Architecture
+
+```text
+                         ┌─────────────────────┐
+                         │        User         │
+                         └──────────┬──────────┘
+                                    │
+                                    ▼
+                         ┌─────────────────────┐
+                         │   React Frontend    │
+                         │     Vite + React    │
+                         │      Render         │
+                         └──────────┬──────────┘
+                                    │
+                              REST API / HTTP
+                                    │
+                                    ▼
+                         ┌─────────────────────┐
+                         │   Express Backend   │
+                         │      Node.js        │
+                         │       Render        │
+                         └──────────┬──────────┘
+                                    │
+                         ┌──────────┴──────────┐
+                         │                     │
+                         ▼                     ▼
+                ┌─────────────────┐   ┌─────────────────┐
+                │ Authentication  │   │ Application API │
+                │      JWT        │   │     Routes      │
+                └─────────────────┘   └────────┬────────┘
+                                               │
+                                               ▼
+                                    ┌─────────────────────┐
+                                    │    MongoDB Atlas    │
+                                    └─────────────────────┘
+```
+
+---
+
+# 📁 Project Structure
 
 ```text
 CodeArea/
@@ -174,70 +291,65 @@ CodeArea/
 └── package.json
 ```
 
-> Folder names may differ slightly depending on the current version of the project.
-
 ---
 
 # 🔄 Application Flow
 
 ```text
-                ┌───────────────────┐
-                │      User         │
-                └─────────┬─────────┘
-                          │
-                          ▼
-                ┌───────────────────┐
-                │   React Client    │
-                │   Vite + React    │
-                └─────────┬─────────┘
-                          │
-                    HTTP / REST API
-                          │
-                          ▼
-                ┌───────────────────┐
-                │  Express Server   │
-                │     Node.js       │
-                └─────────┬─────────┘
-                          │
-              ┌───────────┴───────────┐
-              │                       │
-              ▼                       ▼
-      ┌───────────────┐       ┌───────────────┐
-      │ Authentication│       │ Application   │
-      │     / JWT     │       │    Routes     │
-      └───────────────┘       └───────┬───────┘
-                                      │
-                                      ▼
-                              ┌───────────────┐
-                              │    MongoDB    │
-                              └───────────────┘
+User
+ │
+ ▼
+Register / Login
+ │
+ ▼
+JWT Authentication
+ │
+ ▼
+Dashboard
+ │
+ ├───────────────┐
+ ▼               ▼
+Problems       Profile
+ │
+ ▼
+Problem Details
+ │
+ ├───────────────┐
+ ▼               ▼
+Submit         Bookmark
+ │               │
+ ▼               ▼
+Submission     Bookmarks
+History
 ```
 
 ---
 
-# 📁 Main Application Modules
+# 🔐 Authentication Flow
 
-## Authentication
-
-Authentication is handled using JWT tokens.
-
-The general authentication flow is:
+CodeArea uses JWT-based authentication.
 
 ```text
-Register
-   ↓
-Login
-   ↓
-Server validates credentials
-   ↓
-JWT token generated
-   ↓
-Token stored on client
-   ↓
-Token sent with protected API requests
+User Registration
+        ↓
+Credentials Stored
+        ↓
+User Login
+        ↓
+Server Validates Credentials
+        ↓
+JWT Token Generated
+        ↓
+Token Stored on Client
+        ↓
+Token Sent with Protected Requests
+        ↓
+Backend Middleware Validates Token
+        ↓
+Protected Resource Returned
 ```
 
-Protected requests use:
+Protected API requests use:
 
 ```http
 Authorization: Bearer <token>
@@ -245,7 +357,7 @@ Authorization: Bearer <token>
 
 ---
 
-## Problems
+# 📚 Problem Management
 
 Problems are stored in MongoDB and accessed through REST APIs.
 
@@ -257,181 +369,160 @@ Description
 Difficulty
 Category
 Slug
-Test cases / constraints
+Constraints
+Test Cases
 ```
 
-The frontend uses the problem slug to open a problem page:
+Problems can be accessed using dynamic slugs:
 
 ```text
-/problem/two-sum
+/problems/two-sum
 ```
+
+This allows every problem to have its own dedicated page.
 
 ---
 
-## Bookmarks
-
-Bookmarks allow users to save problems for later.
-
-Example flow:
+# 🔖 Bookmark Flow
 
 ```text
 Problem Page
      │
      ▼
-Bookmark Problem
+Click Bookmark
      │
      ▼
-Bookmark stored in MongoDB
+POST Bookmark Request
+     │
+     ▼
+Express Backend
+     │
+     ▼
+MongoDB
+     │
+     ▼
+Bookmark Saved
      │
      ▼
 Bookmarks Page
-     │
-     ▼
-Open / Remove Bookmark
 ```
+
+Users can later remove saved problems using the bookmark functionality.
 
 ---
 
-## Submissions
-
-When a user submits code:
+# 💻 Submission Flow
 
 ```text
-User writes code
-       ↓
-Submit solution
-       ↓
-Frontend sends request
-       ↓
-Express API
-       ↓
-Submission processing
-       ↓
-Submission stored
-       ↓
-Result returned to frontend
+User Writes Solution
+          ↓
+      Submit Code
+          ↓
+   React API Request
+          ↓
+     Express Route
+          ↓
+  Submission Processing
+          ↓
+   Store Submission
+          ↓
+ Return Submission Status
+          ↓
+ Display Result to User
 ```
 
-Submission records can contain:
+Submission records contain information such as:
 
 ```text
 User
 Problem
-Language
 Code
+Language
 Status
 Created At
 ```
 
 ---
 
-## Submission History
+# 📜 Submission History
 
-The submission history page retrieves submissions associated with a particular problem.
+Users can retrieve previous submissions for a problem.
 
-Example endpoint:
+Example:
 
 ```http
 GET /api/submissions/:problemId
 ```
 
-The frontend displays the submissions in reverse chronological order.
+The frontend presents submissions in reverse chronological order so the most recent submission appears first.
 
 ---
 
 # 🔌 API Endpoints
 
-The following are the major API routes used by the application.
-
 ## Authentication
 
-```http
-POST /api/auth/register
-POST /api/auth/login
-GET  /api/auth/me
-```
-
-### Register
-
-```http
-POST /api/auth/register
-```
-
-Creates a new user account.
-
-### Login
-
-```http
-POST /api/auth/login
-```
-
-Authenticates a user and returns an authentication token.
-
-### Current User
-
-```http
-GET /api/auth/me
-```
-
-Returns information about the currently authenticated user.
+| Method | Endpoint             | Description                    |
+| ------ | -------------------- | ------------------------------ |
+| POST   | `/api/auth/register` | Register a new user            |
+| POST   | `/api/auth/login`    | Authenticate user              |
+| GET    | `/api/auth/me`       | Get current authenticated user |
 
 ---
 
 ## Problems
 
-```http
-GET /api/problems
-GET /api/problems/:slug
-```
-
-Used to retrieve problems and individual problem details.
+| Method | Endpoint              | Description            |
+| ------ | --------------------- | ---------------------- |
+| GET    | `/api/problems`       | Get available problems |
+| GET    | `/api/problems/:slug` | Get a specific problem |
 
 ---
 
 ## Bookmarks
 
-```http
-GET    /api/bookmarks
-POST   /api/bookmarks/:problemId
-DELETE /api/bookmarks/:problemId
-```
-
-Used to create, retrieve, and remove user bookmarks.
+| Method | Endpoint                    | Description          |
+| ------ | --------------------------- | -------------------- |
+| GET    | `/api/bookmarks`            | Get user's bookmarks |
+| POST   | `/api/bookmarks/:problemId` | Add a bookmark       |
+| DELETE | `/api/bookmarks/:problemId` | Remove a bookmark    |
 
 ---
 
 ## Submissions
 
-```http
-POST /api/submit
-GET  /api/submissions/:problemId
-```
-
-Used for submitting solutions and retrieving submission history.
+| Method | Endpoint                      | Description            |
+| ------ | ----------------------------- | ---------------------- |
+| POST   | `/api/submit`                 | Submit a solution      |
+| GET    | `/api/submissions/:problemId` | Get submission history |
 
 ---
 
 ## Dashboard
 
-```http
-GET /api/dashboard/stats
-```
-
-Returns user statistics used by the profile/dashboard.
+| Method | Endpoint               | Description         |
+| ------ | ---------------------- | ------------------- |
+| GET    | `/api/dashboard/stats` | Get user statistics |
 
 ---
 
-# ⚙️ Installation
+# ⚙️ Local Installation
+
+## Prerequisites
+
+Make sure you have installed:
+
+* Node.js
+* npm
+* Git
+* MongoDB or MongoDB Atlas
+
+---
 
 ## 1. Clone the Repository
 
 ```bash
 git clone https://github.com/vasudevgautam/CodeArea.git
-```
-
-Move into the project:
-
-```bash
 cd CodeArea
 ```
 
@@ -451,31 +542,39 @@ Install dependencies:
 npm install
 ```
 
-Create a `.env` file inside the `server` directory.
+Create:
+
+```text
+server/.env
+```
 
 Example:
 
 ```env
 PORT=5000
+
 MONGO_URI=mongodb://127.0.0.1:27017/codearea
-JWT_SECRET=your_secret_key
+
+JWT_SECRET=your_secure_jwt_secret
+
+CLIENT_URL=http://localhost:5173
 ```
 
 > Never commit your real `.env` file to GitHub.
 
-Start the development server:
+Start the backend:
 
 ```bash
 npm run dev
 ```
 
-If Nodemon is not configured:
+Or:
 
 ```bash
 node server.js
 ```
 
-The backend should run on:
+The backend runs locally on:
 
 ```text
 http://localhost:5000
@@ -499,13 +598,25 @@ Install dependencies:
 npm install
 ```
 
-Start the Vite development server:
+Create:
+
+```text
+client/.env
+```
+
+Add:
+
+```env
+VITE_API_URL=http://localhost:5000/api
+```
+
+Start the development server:
 
 ```bash
 npm run dev
 ```
 
-The frontend should normally be available at:
+The frontend normally runs on:
 
 ```text
 http://localhost:5173
@@ -515,21 +626,27 @@ http://localhost:5173
 
 # 🗄️ MongoDB Setup
 
-The application uses MongoDB.
+CodeArea uses MongoDB for persistent application data.
 
-You can run MongoDB locally using MongoDB Community Server or manage the database using MongoDB Compass.
+### Local MongoDB
 
-Example local connection:
+Example:
 
 ```text
 mongodb://127.0.0.1:27017/codearea
 ```
 
-After starting MongoDB, start the backend server.
+### MongoDB Atlas
+
+For production, the application uses MongoDB Atlas.
+
+The production connection string is stored securely through Render environment variables and is **not committed to GitHub**.
 
 ---
 
 # 🔑 Environment Variables
+
+## Backend
 
 Create:
 
@@ -537,36 +654,40 @@ Create:
 server/.env
 ```
 
-Example:
-
 ```env
 PORT=5000
-
-MONGO_URI=mongodb://127.0.0.1:27017/codearea
-
-JWT_SECRET=replace_with_a_secure_secret
+MONGO_URI=your_mongodb_connection_string
+JWT_SECRET=your_secure_jwt_secret
+CLIENT_URL=http://localhost:5173
 ```
 
-If additional environment variables are required by your current backend, add them to this file.
+## Frontend
 
-### Important
-
-Do not upload:
+Create:
 
 ```text
-.env
-node_modules/
+client/.env
 ```
 
-to GitHub.
+```env
+VITE_API_URL=http://localhost:5000/api
+```
 
-They should be included in `.gitignore`.
+### Production
+
+The production frontend uses:
+
+```env
+VITE_API_URL=https://codearea-56cz.onrender.com/api
+```
+
+Production environment variables are configured directly through Render.
 
 ---
 
 # ▶️ Running the Project
 
-You need two terminals.
+The application requires two development processes.
 
 ### Terminal 1 — Backend
 
@@ -584,7 +705,7 @@ npm install
 npm run dev
 ```
 
-Then open:
+Open:
 
 ```text
 http://localhost:5173
@@ -594,82 +715,191 @@ http://localhost:5173
 
 # 🧪 Development Workflow
 
-A typical development workflow is:
-
 ```text
-1. Start MongoDB
-       ↓
-2. Start Express backend
-       ↓
-3. Start React frontend
-       ↓
-4. Register/Login
-       ↓
-5. Browse Problems
-       ↓
-6. Open Problem
-       ↓
-7. Submit Solution
-       ↓
-8. View Submission History
-       ↓
-9. Bookmark Problems
-       ↓
-10. View Profile / Statistics
+Start MongoDB
+      ↓
+Start Express Backend
+      ↓
+Start React Frontend
+      ↓
+Register / Login
+      ↓
+Browse Problems
+      ↓
+Open Problem
+      ↓
+Submit Solution
+      ↓
+View Submission Result
+      ↓
+View Submission History
+      ↓
+Bookmark Problems
+      ↓
+View Profile & Statistics
 ```
 
 ---
 
-# 🔐 Security
+# 🚀 Production Deployment
 
-The project uses several security-related mechanisms:
+CodeArea is deployed using **Render** and **MongoDB Atlas**.
 
-* JWT authentication
-* Protected API routes
-* Authorization headers
-* Environment variables for secrets
+## Frontend
+
+The React/Vite frontend is deployed as a Render Static Site.
+
+Production API configuration:
+
+```env
+VITE_API_URL=https://codearea-56cz.onrender.com/api
+```
+
+## Backend
+
+The Node.js/Express server is deployed on Render.
+
+Production environment variables include:
+
+```text
+PORT
+MONGO_URI
+JWT_SECRET
+CLIENT_URL
+```
+
+## Database
+
+MongoDB Atlas is used as the production database.
+
+---
+
+# 🌐 Production Architecture
+
+```text
+                     INTERNET
+                         │
+                         ▼
+              ┌─────────────────────┐
+              │   CodeArea Client   │
+              │   React + Vite      │
+              │      Render         │
+              └──────────┬──────────┘
+                         │
+                         │ HTTPS
+                         ▼
+              ┌─────────────────────┐
+              │   CodeArea Server   │
+              │ Node.js + Express   │
+              │      Render         │
+              └──────────┬──────────┘
+                         │
+                         │ MongoDB Driver
+                         ▼
+              ┌─────────────────────┐
+              │    MongoDB Atlas    │
+              │      Database       │
+              └─────────────────────┘
+```
+
+---
+
+# 🔒 Security
+
+The project implements several security practices:
+
+* JWT-based authentication
+* Protected backend routes
+* Bearer token authorization
+* Environment variables for sensitive configuration
 * Password authentication
 * CORS configuration
+* MongoDB Atlas network access controls
 
-Sensitive information such as database credentials and JWT secrets should never be committed to the repository.
+### Never commit secrets
+
+The following should never be pushed to GitHub:
+
+```text
+.env
+node_modules/
+```
+
+The root `.gitignore` contains:
+
+```gitignore
+node_modules/
+.env
+.env.*
+dist/
+```
 
 ---
 
 # 📱 Responsive Design
 
-The frontend is designed to work across:
+CodeArea is designed for different screen sizes:
 
 * 💻 Desktop
 * 💻 Laptop
 * 📱 Mobile
 * 📟 Tablet
 
-Responsive CSS media queries are used throughout the application.
+Responsive CSS is used to adapt layouts and components to different viewport sizes.
+
+---
+
+# 🐛 Error & Loading Handling
+
+The application provides UI states for:
+
+* Loading
+* API failures
+* Authentication errors
+* Empty problem lists
+* Empty bookmarks
+* Empty submission history
+* Failed submissions
+* Invalid requests
+
+General request flow:
+
+```text
+API Request
+     │
+     ▼
+ ┌─────────┐
+ │         │
+ ▼         ▼
+Success   Error
+ │         │
+ ▼         ▼
+Data     Error UI
+```
 
 ---
 
 # 🎯 Project Goals
 
-The main goals of CodeArea are:
+CodeArea was built to gain practical experience with:
 
-* Build a complete full-stack application
-* Understand React frontend development
-* Build REST APIs using Express
-* Work with MongoDB and Mongoose
-* Implement JWT authentication
-* Practice API integration
-* Build reusable UI components
-* Handle protected routes
-* Implement coding-platform functionality
-* Understand real-world frontend/backend communication
+* Full-stack web development
+* React application architecture
+* REST API development
+* Authentication and authorization
+* MongoDB database design
+* API integration
+* CRUD operations
+* Protected routes
+* Responsive UI development
+* Production deployment
+* Git and GitHub workflow
 
 ---
 
-# 📚 What I Learned
+# 📚 Key Learning Outcomes
 
-Through this project, I worked with:
-
-### Frontend
+## Frontend
 
 * React components
 * React Hooks
@@ -677,115 +907,59 @@ Through this project, I worked with:
 * `useEffect`
 * React Router
 * Protected routes
-* API integration
 * Axios
-* Fetch API
+* API integration
+* Environment variables
 * Responsive CSS
 * Loading and error states
 
-### Backend
+## Backend
 
 * Node.js
 * Express.js
-* REST API development
+* REST API design
 * Middleware
 * JWT authentication
 * Route handling
 * Error handling
+* Mongoose
 * MongoDB
-* Mongoose models
 
-### Full Stack
+## Full Stack
 
-* Frontend ↔ Backend communication
+* Client-server architecture
+* Frontend/backend communication
 * Authentication flow
 * Database operations
-* CRUD operations
+* CRUD functionality
 * API debugging
-* Client/server architecture
-* Git and GitHub workflow
-
----
-
-# 🐛 Error Handling
-
-The application includes UI states for:
-
-* Loading
-* API errors
-* Empty problem lists
-* Empty bookmarks
-* Empty submission history
-* Authentication failures
-* Failed submissions
-
-Example:
-
-```text
-Loading...
-   ↓
-API Request
-   ↓
- ┌───────────────┐
- │               │
- ▼               ▼
-Success         Error
- │               │
- ▼               ▼
-Display Data   Error UI
-```
+* Environment configuration
+* Production deployment
 
 ---
 
 # 🔮 Future Improvements
 
-The project can be extended with:
+Planned improvements include:
 
 * [ ] Online code execution sandbox
 * [ ] Multiple programming language support
-* [ ] Real-time code execution
-* [ ] Test-case evaluation
+* [ ] Automated test-case evaluation
 * [ ] Leaderboard
-* [ ] Global user rankings
+* [ ] Global rankings
 * [ ] Daily coding streak
-* [ ] Difficulty-based filtering
-* [ ] Search problems
+* [ ] Problem search
+* [ ] Advanced filtering
 * [ ] Tags and topics
-* [ ] User profile customization
+* [ ] Profile customization
 * [ ] Profile picture upload
-* [ ] Edit profile
 * [ ] Advanced submission analytics
 * [ ] Admin dashboard
 * [ ] Problem creation interface
 * [ ] Problem discussion section
-* [ ] Comments
+* [ ] Comments and discussions
 * [ ] Likes/upvotes
-* [ ] Dark/light theme
-* [ ] Cloud deployment
-
----
-
-# 🚀 Deployment
-
-The application can be deployed using services such as:
-
-### Frontend
-
-* Vercel
-* Netlify
-
-### Backend
-
-* Render
-* Railway
-* AWS
-* Fly.io
-
-### Database
-
-* MongoDB Atlas
-
-For production deployment, environment variables should be configured through the hosting provider instead of committing them to GitHub.
+* [ ] Dark/light theme options
 
 ---
 
@@ -793,47 +967,55 @@ For production deployment, environment variables should be configured through th
 
 Contributions are welcome.
 
-### Steps
+### 1. Fork the repository
 
-1. Fork the repository
-2. Create a new branch
+### 2. Clone your fork
+
+```bash
+git clone https://github.com/vasudevgautam/CodeArea.git
+cd CodeArea
+```
+
+### 3. Create a feature branch
 
 ```bash
 git checkout -b feature/new-feature
 ```
 
-3. Make your changes
-4. Commit your changes
+### 4. Make your changes
+
+### 5. Commit your changes
 
 ```bash
 git add .
 git commit -m "Add new feature"
 ```
 
-5. Push the branch
+### 6. Push your branch
 
 ```bash
 git push origin feature/new-feature
 ```
 
-6. Open a Pull Request
+### 7. Open a Pull Request
 
 ---
 
 # 📄 License
 
-This project is currently intended for educational and portfolio purposes.
+This project is currently intended for **educational and portfolio purposes**.
 
-You may add a specific open-source license such as MIT in the future if required.
+A specific open-source license can be added in the future.
 
 ---
 
 # 👨‍💻 Author
 
-**Vasudev Gautam**
+## Vasudev Gautam
 
+Full-Stack Developer | Competitive Programming Enthusiast
 
-Interested in:
+### Interests
 
 * Full-Stack Development
 * Data Structures & Algorithms
@@ -845,12 +1027,34 @@ Interested in:
 
 # ⭐ Support
 
-If you find this project useful, consider giving the repository a ⭐ on GitHub.
+If you find **CodeArea** useful or interesting, consider giving the repository a ⭐ on GitHub.
 
 ---
 
-## 📌 Project Status
+# 📌 Project Status
 
-🚧 **Active Development**
+🟢 **Deployed & Working**
 
-The project is continuously being improved with new features, UI enhancements, bug fixes, and backend functionality.
+CodeArea is currently deployed and functional.
+
+### Current Stack
+
+```text
+Frontend  → React + Vite
+Backend   → Node.js + Express
+Database  → MongoDB Atlas
+Auth      → JWT
+Hosting   → Render
+```
+
+### Live Application
+
+🌐 **https://codearea-56cz.onrender.com**
+
+---
+
+## 💡 Why I Built CodeArea
+
+CodeArea was created as a practical full-stack project to understand how modern web applications are designed, developed, connected to databases, authenticated, and deployed to production.
+
+The project combines frontend development, backend API design, database management, authentication, and cloud deployment into a single application.

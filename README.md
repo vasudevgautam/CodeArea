@@ -9,6 +9,18 @@
 [![Deployment](https://img.shields.io/badge/Deployed-Render-purple)](https://render.com/)
 
 ---
+## some snaps
+<img width="1733" height="872" alt="image" src="https://github.com/user-attachments/assets/33096c83-e40a-40fb-9c6f-0cd14e2446c2" />
+
+<img width="1908" height="881" alt="image" src="https://github.com/user-attachments/assets/efb32c02-bb80-4189-9e8b-873c335ed2bf" />
+
+<img width="1917" height="881" alt="image" src="https://github.com/user-attachments/assets/ed67623a-d455-4442-85c4-146561fab224" />
+
+<img width="1897" height="880" alt="image" src="https://github.com/user-attachments/assets/a95fe341-ff83-44a1-b0ca-869f23e47afe" />
+
+<img width="1906" height="888" alt="image" src="https://github.com/user-attachments/assets/b4a23206-85e5-434f-bd38-a9065cab63b8" />
+
+
 
 ## 🌐 Live Demo
 
